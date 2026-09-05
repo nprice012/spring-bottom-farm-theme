@@ -1,0 +1,79 @@
+<div class="sbf-product-page">
+  <div class="sbf-wrap sbf-product-grid">
+    <div>
+      {% if product.featured_image %}
+        {{ product.featured_image | image_url: width: 1400 | image_tag: loading: 'eager', alt: product.title }}
+      {% endif %}
+    </div>
+
+    <div class="sbf-product-copy">
+      <div class="sbf-eyebrow">Spring Bottom Farm</div>
+      <h1>{{ product.title }}</h1>
+
+      <div class="sbf-product-price">
+        {{ product.selected_or_first_available_variant.price | money }}
+      </div>
+
+      {% if product.description != blank %}
+        <div class="sbf-product-description">{{ product.description }}</div>
+      {% endif %}
+
+      {% form 'product', product, class: 'sbf-product-form' %}
+        {% unless product.has_only_default_variant %}
+          <label for="ProductSelect-{{ section.id | default: 'product' }}">Choose an option</label>
+          <select name="id" id="ProductSelect-{{ section.id | default: 'product' }}">
+            {% for variant in product.variants %}
+              <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
+                {{ variant.title }}{% unless variant.available %} — Sold out{% endunless %}
+              </option>
+            {% endfor %}
+          </select>
+        {% else %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        {% endunless %}
+
+        {% if product.selling_plan_groups.size > 0 %}
+          <div class="sbf-selling-plans">
+            <label for="SellingPlan-{{ section.id | default: 'product' }}">Subscription</label>
+            <select name="selling_plan" id="SellingPlan-{{ section.id | default: 'product' }}">
+              <option value="">One-time purchase</option>
+              {% for group in product.selling_plan_groups %}
+                {% for plan in group.selling_plans %}
+                  <option value="{{ plan.id }}">{{ plan.name }}</option>
+                {% endfor %}
+              {% endfor %}
+            </select>
+          </div>
+        {% endif %}
+
+        <label for="Quantity-{{ section.id | default: 'product' }}">Quantity</label>
+        <input id="Quantity-{{ section.id | default: 'product' }}" type="number" name="quantity" value="1" min="1">
+
+        <button type="submit" class="sbf-button" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+          {% if product.selected_or_first_available_variant.available %}Add to Cart{% else %}Sold Out{% endif %}
+        </button>
+      {% endform %}
+
+      <p class="sbf-product-note">
+        Choose a subscription option above for recurring egg deliveries or pickups when available.
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .sbf-product-page{background:#f7f4ed;color:#243126;padding:80px 24px}
+  .sbf-product-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start}
+  .sbf-product-grid img{width:100%;display:block}
+  .sbf-product-copy{padding:30px 0}
+  .sbf-product-copy h1{font-size:clamp(42px,6vw,72px);line-height:1;margin:0 0 20px;letter-spacing:-.04em}
+  .sbf-product-price{font-size:24px;font-weight:700;margin-bottom:25px}
+  .sbf-product-description{font-size:18px;line-height:1.7;margin-bottom:30px}
+  .sbf-product-form{display:flex;flex-direction:column;gap:10px;max-width:500px}
+  .sbf-product-form label{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:12px}
+  .sbf-product-form select,.sbf-product-form input[type=number]{width:100%;padding:14px;border:1px solid #b9b4a7;background:#fff;font:inherit}
+  .sbf-product-form button{border:0;cursor:pointer;margin-top:18px}
+  .sbf-product-form button:disabled{opacity:.5;cursor:not-allowed}
+  .sbf-product-note{font-size:14px;line-height:1.6;max-width:500px;margin-top:25px}
+  @media screen and (max-width:749px){.sbf-product-grid{grid-template-columns:1fr;gap:25px}.sbf-product-copy{padding:0}}
+</style>
