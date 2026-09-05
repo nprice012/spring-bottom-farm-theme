@@ -1,555 +1,128 @@
-{% assign egg_product = blank %}
+{% if page.handle == 'egg-subscription' %}
+  {% assign hero_image = images['2W1A5023_2.jpg'] %}
+  {% assign egg_image = images['IMG_7892.jpg'] %}
+  {% assign cooler_image = images['IMG_8147.jpg'] %}
+  {% assign table_image = images['IMG_8177_2.jpg'] %}
+  {% assign carton_image = images['IMG_8146.jpg'] %}
+  {% capture egg_product_search_url %}{{ routes.search_url }}?q=Pasture-Raised%20Eggs&type=product{% endcapture %}
 
-{% for product in collections.all.products %}
-  {% if product.title == 'Pasture-Raised Eggs' %}
-    {% assign egg_product = product %}
-    {% break %}
-  {% endif %}
-{% endfor %}
-
-{% assign hero_image = images['2W1A5023_2.jpg'] %}
-{% assign egg_image = images['IMG_7892.jpg'] %}
-{% assign cooler_image = images['IMG_8147.jpg'] %}
-{% assign table_image = images['IMG_8177_2.jpg'] %}
-{% assign carton_image = images['IMG_8146.jpg'] %}
-
-<style>
-  .sbf-egg-page {
-    background: #f7f4ed;
-    color: #243126;
-  }
-
-  .sbf-egg-hero {
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    min-height: 620px;
-  }
-
-  .sbf-egg-hero-image {
-    min-height: 620px;
-    overflow: hidden;
-  }
-
-  .sbf-egg-hero-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .sbf-egg-hero-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 80px 8%;
-    background: #eee9dc;
-  }
-
-  .sbf-eyebrow {
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-
-  .sbf-egg-hero h1 {
-    font-size: clamp(48px, 6vw, 82px);
-    line-height: .98;
-    margin: 0 0 28px;
-    letter-spacing: -.04em;
-  }
-
-  .sbf-egg-hero p {
-    font-size: 20px;
-    line-height: 1.6;
-    max-width: 600px;
-    margin: 0 0 34px;
-  }
-
-  .sbf-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: fit-content;
-    padding: 17px 28px;
-    background: #243126;
-    color: #fff;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    transition: opacity .2s ease;
-  }
-
-  .sbf-button:hover {
-    opacity: .82;
-  }
-
-  .sbf-egg-intro {
-    max-width: 850px;
-    margin: 0 auto;
-    padding: 100px 24px 80px;
-    text-align: center;
-  }
-
-  .sbf-egg-intro h2 {
-    font-size: clamp(36px, 5vw, 58px);
-    line-height: 1.05;
-    margin: 0 0 24px;
-    letter-spacing: -.03em;
-  }
-
-  .sbf-egg-intro p {
-    font-size: 19px;
-    line-height: 1.7;
-    margin: 0;
-  }
-
-  .sbf-egg-feature {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: stretch;
-  }
-
-  .sbf-egg-feature.reverse .sbf-egg-feature-image {
-    order: 2;
-  }
-
-  .sbf-egg-feature-image {
-    min-height: 500px;
-    overflow: hidden;
-  }
-
-  .sbf-egg-feature-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .sbf-egg-feature-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 70px 10%;
-    background: #fff;
-  }
-
-  .sbf-egg-feature-content h2 {
-    font-size: clamp(34px, 4vw, 52px);
-    line-height: 1.05;
-    margin: 0 0 22px;
-    letter-spacing: -.03em;
-  }
-
-  .sbf-egg-feature-content p {
-    font-size: 18px;
-    line-height: 1.7;
-    margin: 0;
-  }
-
-  .sbf-egg-plan {
-    padding: 100px 24px;
-    background: #ddd8c9;
-  }
-
-  .sbf-egg-plan-inner {
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .sbf-egg-plan h2 {
-    font-size: clamp(38px, 5vw, 60px);
-    margin: 0 0 20px;
-    letter-spacing: -.03em;
-  }
-
-  .sbf-egg-plan p {
-    font-size: 18px;
-    line-height: 1.7;
-    margin: 0 auto 35px;
-    max-width: 700px;
-  }
-
-  .sbf-egg-options {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-    margin: 45px 0;
-  }
-
-  .sbf-egg-option {
-    background: #fff;
-    padding: 32px 20px;
-  }
-
-  .sbf-egg-option strong {
-    display: block;
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-
-  .sbf-egg-option span {
-    font-size: 15px;
-    line-height: 1.5;
-  }
-
-  .sbf-egg-gallery {
-    padding: 100px 24px;
-    background: #f7f4ed;
-  }
-
-  .sbf-egg-gallery-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .sbf-egg-gallery h2 {
-    font-size: clamp(38px, 5vw, 58px);
-    text-align: center;
-    margin: 0 0 50px;
-    letter-spacing: -.03em;
-  }
-
-  .sbf-egg-gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-  }
-
-  .sbf-egg-gallery-grid img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    display: block;
-  }
-
-  .sbf-egg-final {
-    padding: 110px 24px;
-    background: #243126;
-    color: #fff;
-    text-align: center;
-  }
-
-  .sbf-egg-final-inner {
-    max-width: 850px;
-    margin: 0 auto;
-  }
-
-  .sbf-egg-final h2 {
-    font-size: clamp(42px, 6vw, 70px);
-    line-height: 1;
-    margin: 0 0 25px;
-    letter-spacing: -.04em;
-  }
-
-  .sbf-egg-final p {
-    font-size: 19px;
-    line-height: 1.6;
-    margin: 0 auto 35px;
-    max-width: 650px;
-  }
-
-  .sbf-egg-final .sbf-button {
-    background: #fff;
-    color: #243126;
-  }
-
-  @media screen and (max-width: 749px) {
-    .sbf-egg-hero {
-      grid-template-columns: 1fr;
+  <style>
+    .sbf-egg-page{background:#f7f4ed;color:#243126}
+    .sbf-egg-hero{display:grid;grid-template-columns:1.1fr 1fr;min-height:620px}
+    .sbf-egg-hero-image{min-height:620px;overflow:hidden}
+    .sbf-egg-hero-image img,.sbf-egg-feature-image img,.sbf-egg-gallery-grid img{width:100%;height:100%;object-fit:cover;display:block}
+    .sbf-egg-hero-content{display:flex;flex-direction:column;justify-content:center;padding:80px 8%;background:#eee9dc}
+    .sbf-eyebrow{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:20px}
+    .sbf-egg-hero h1{font-size:clamp(48px,6vw,82px);line-height:.98;margin:0 0 28px;letter-spacing:-.04em}
+    .sbf-egg-hero p{font-size:20px;line-height:1.6;max-width:600px;margin:0 0 34px}
+    .sbf-button{display:inline-flex;align-items:center;justify-content:center;width:fit-content;padding:17px 28px;background:#243126;color:#fff;text-decoration:none;font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+    .sbf-button:hover{opacity:.82}
+    .sbf-egg-intro{max-width:850px;margin:0 auto;padding:100px 24px 80px;text-align:center}
+    .sbf-egg-intro h2,.sbf-egg-plan h2,.sbf-egg-gallery h2{font-size:clamp(38px,5vw,60px);line-height:1.05;letter-spacing:-.03em;margin:0 0 24px}
+    .sbf-egg-intro p,.sbf-egg-plan p,.sbf-egg-feature-content p,.sbf-egg-final p{font-size:19px;line-height:1.7}
+    .sbf-egg-feature{display:grid;grid-template-columns:1fr 1fr}
+    .sbf-egg-feature.reverse .sbf-egg-feature-image{order:2}
+    .sbf-egg-feature-image{min-height:500px;overflow:hidden}
+    .sbf-egg-feature-content{display:flex;flex-direction:column;justify-content:center;padding:70px 10%;background:#fff}
+    .sbf-egg-feature-content h2{font-size:clamp(34px,4vw,52px);line-height:1.05;margin:0 0 22px;letter-spacing:-.03em}
+    .sbf-egg-plan{padding:100px 24px;background:#ddd8c9}
+    .sbf-egg-plan-inner{max-width:900px;margin:0 auto;text-align:center}
+    .sbf-egg-options{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:45px 0}
+    .sbf-egg-option{background:#fff;padding:32px 20px}
+    .sbf-egg-option strong{display:block;font-size:18px;margin-bottom:10px}
+    .sbf-egg-option span{font-size:15px;line-height:1.5}
+    .sbf-egg-gallery{padding:100px 24px;background:#f7f4ed}
+    .sbf-egg-gallery-inner{max-width:1200px;margin:0 auto}
+    .sbf-egg-gallery h2{text-align:center;margin-bottom:50px}
+    .sbf-egg-gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .sbf-egg-gallery-grid img{aspect-ratio:1/1}
+    .sbf-egg-final{padding:110px 24px;background:#243126;color:#fff;text-align:center}
+    .sbf-egg-final-inner{max-width:850px;margin:0 auto}
+    .sbf-egg-final h2{font-size:clamp(42px,6vw,70px);line-height:1;margin:0 0 25px;letter-spacing:-.04em}
+    .sbf-egg-final .sbf-button{background:#fff;color:#243126}
+    @media screen and (max-width:749px){
+      .sbf-egg-hero,.sbf-egg-feature{grid-template-columns:1fr}
+      .sbf-egg-hero-image{min-height:400px}
+      .sbf-egg-hero-content,.sbf-egg-feature-content{padding:55px 25px 65px}
+      .sbf-egg-feature.reverse .sbf-egg-feature-image{order:0}
+      .sbf-egg-feature-image{min-height:400px}
+      .sbf-egg-options,.sbf-egg-gallery-grid{grid-template-columns:1fr}
     }
+  </style>
 
-    .sbf-egg-hero-image {
-      min-height: 400px;
-    }
-
-    .sbf-egg-hero-content {
-      padding: 55px 25px 65px;
-    }
-
-    .sbf-egg-feature {
-      grid-template-columns: 1fr;
-    }
-
-    .sbf-egg-feature.reverse .sbf-egg-feature-image {
-      order: 0;
-    }
-
-    .sbf-egg-feature-image {
-      min-height: 400px;
-    }
-
-    .sbf-egg-feature-content {
-      padding: 55px 25px 65px;
-    }
-
-    .sbf-egg-options {
-      grid-template-columns: 1fr;
-    }
-
-    .sbf-egg-gallery-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-</style>
-
-<div class="sbf-egg-page">
-
-  <section class="sbf-egg-hero">
-
-    <div class="sbf-egg-hero-image">
-      {% if hero_image != blank %}
-        <img
-          src="{{ hero_image | image_url: width: 1600 }}"
-          alt="Pasture raised chicken at Spring Bottom Farm"
-          loading="eager"
-        >
-      {% endif %}
-    </div>
-
-    <div class="sbf-egg-hero-content">
-
-      <div class="sbf-eyebrow">
-        Spring Bottom Farm
+  <div class="sbf-egg-page">
+    <section class="sbf-egg-hero">
+      <div class="sbf-egg-hero-image">
+        {% if hero_image != blank %}<img src="{{ hero_image | image_url: width:1600 }}" alt="Pasture-raised chicken at Spring Bottom Farm" loading="eager">{% endif %}
       </div>
-
-      <h1>
-        Fresh Eggs.<br>
-        On Your Schedule.
-      </h1>
-
-      <p>
-        Get fresh, pasture-raised eggs from our farm on a schedule
-        that works for you. Choose weekly or every-other-week
-        deliveries or pickups and never run out of eggs again.
-      </p>
-
-      {% if egg_product != blank %}
-        <a class="sbf-button" href="{{ egg_product.url }}">
-          Start Your Egg Subscription
-        </a>
-      {% endif %}
-
-    </div>
-
-  </section>
-
-
-  <section class="sbf-egg-intro">
-
-    <div class="sbf-eyebrow">
-      The Egg Subscription
-    </div>
-
-    <h2>
-      Fresh eggs without having to think about it.
-    </h2>
-
-    <p>
-      Our Egg Subscription makes getting farm-fresh eggs simple.
-      Choose how often you want them, choose how many you need,
-      and we'll have your eggs ready for you on schedule.
-    </p>
-
-  </section>
-
-
-  {% if egg_image != blank %}
-    <section class="sbf-egg-feature">
-
-      <div class="sbf-egg-feature-image">
-        <img
-          src="{{ egg_image | image_url: width: 1400 }}"
-          alt="Fresh brown egg from Spring Bottom Farm"
-          loading="lazy"
-        >
+      <div class="sbf-egg-hero-content">
+        <div class="sbf-eyebrow">Spring Bottom Farm</div>
+        <h1>Fresh Eggs.<br>On Your Schedule.</h1>
+        <p>Get fresh, pasture-raised eggs from our farm on a schedule that works for you. Choose weekly or every-other-week subscriptions and never run out of eggs again.</p>
+        <a class="sbf-button" href="{{ egg_product_search_url }}">Start Your Egg Subscription</a>
       </div>
-
-      <div class="sbf-egg-feature-content">
-
-        <div class="sbf-eyebrow">
-          Farm Fresh
-        </div>
-
-        <h2>
-          Eggs from our farm to your table.
-        </h2>
-
-        <p>
-          Our hens spend their days outdoors on pasture,
-          and we collect eggs fresh from the flock. Your
-          subscription means you get that same farm-fresh
-          quality on a regular schedule.
-        </p>
-
-      </div>
-
     </section>
-  {% endif %}
 
-
-  {% if cooler_image != blank %}
-    <section class="sbf-egg-feature reverse">
-
-      <div class="sbf-egg-feature-image">
-        <img
-          src="{{ cooler_image | image_url: width: 1400 }}"
-          alt="Fresh eggs packed at Spring Bottom Farm"
-          loading="lazy"
-        >
-      </div>
-
-      <div class="sbf-egg-feature-content">
-
-        <div class="sbf-eyebrow">
-          Simple & Convenient
-        </div>
-
-        <h2>
-          Your eggs are ready when you need them.
-        </h2>
-
-        <p>
-          Select your preferred schedule and quantity.
-          We'll take care of the rest. Your eggs will be
-          prepared fresh and ready for pickup or delivery
-          according to the options available at checkout.
-        </p>
-
-      </div>
-
+    <section class="sbf-egg-intro">
+      <div class="sbf-eyebrow">The Egg Subscription</div>
+      <h2>Fresh eggs without having to think about it.</h2>
+      <p>Choose how often you want your eggs and how many you need. We'll have them ready for you on schedule.</p>
     </section>
-  {% endif %}
 
+    {% if egg_image != blank %}
+      <section class="sbf-egg-feature">
+        <div class="sbf-egg-feature-image"><img src="{{ egg_image | image_url: width:1400 }}" alt="Fresh brown egg from Spring Bottom Farm" loading="lazy"></div>
+        <div class="sbf-egg-feature-content"><div class="sbf-eyebrow">Farm Fresh</div><h2>Eggs from our farm to your table.</h2><p>Our hens spend their days outdoors on pasture, and we collect eggs fresh from the flock.</p></div>
+      </section>
+    {% endif %}
 
-  <section class="sbf-egg-plan">
+    {% if cooler_image != blank %}
+      <section class="sbf-egg-feature reverse">
+        <div class="sbf-egg-feature-image"><img src="{{ cooler_image | image_url: width:1400 }}" alt="Fresh eggs packed at Spring Bottom Farm" loading="lazy"></div>
+        <div class="sbf-egg-feature-content"><div class="sbf-eyebrow">Simple & Convenient</div><h2>Your eggs are ready when you need them.</h2><p>Select your preferred schedule and quantity. We'll take care of the rest.</p></div>
+      </section>
+    {% endif %}
 
-    <div class="sbf-egg-plan-inner">
-
-      <div class="sbf-eyebrow">
-        Choose Your Schedule
-      </div>
-
-      <h2>
-        Make eggs one less thing to worry about.
-      </h2>
-
-      <p>
-        Select the subscription option that fits your household.
-        You can manage your subscription whenever you need to
-        make a change.
-      </p>
-
-      <div class="sbf-egg-options">
-
-        <div class="sbf-egg-option">
-          <strong>Weekly</strong>
-          <span>
-            Fresh eggs every week.
-          </span>
+    <section class="sbf-egg-plan">
+      <div class="sbf-egg-plan-inner">
+        <div class="sbf-eyebrow">Choose Your Schedule</div>
+        <h2>Make eggs one less thing to worry about.</h2>
+        <p>Select the subscription option that fits your household.</p>
+        <div class="sbf-egg-options">
+          <div class="sbf-egg-option"><strong>Weekly</strong><span>Fresh eggs every week.</span></div>
+          <div class="sbf-egg-option"><strong>Every 2 Weeks</strong><span>A fresh supply every other week.</span></div>
+          <div class="sbf-egg-option"><strong>Flexible Quantity</strong><span>Choose the quantity that works for your household.</span></div>
         </div>
+        <a class="sbf-button" href="{{ egg_product_search_url }}">Choose Your Egg Subscription</a>
+      </div>
+    </section>
 
-        <div class="sbf-egg-option">
-          <strong>Every 2 Weeks</strong>
-          <span>
-            A fresh supply every other week.
-          </span>
+    <section class="sbf-egg-gallery">
+      <div class="sbf-egg-gallery-inner">
+        <div class="sbf-eyebrow" style="text-align:center;">From Our Farm</div>
+        <h2>See where your eggs come from.</h2>
+        <div class="sbf-egg-gallery-grid">
+          {% if table_image != blank %}<img src="{{ table_image | image_url: width:1000 }}" alt="Egg cartons at Spring Bottom Farm" loading="lazy">{% endif %}
+          {% if carton_image != blank %}<img src="{{ carton_image | image_url: width:1000 }}" alt="Fresh eggs in a carton" loading="lazy">{% endif %}
+          {% if cooler_image != blank %}<img src="{{ cooler_image | image_url: width:1000 }}" alt="Fresh eggs prepared at Spring Bottom Farm" loading="lazy">{% endif %}
         </div>
-
-        <div class="sbf-egg-option">
-          <strong>Flexible Quantity</strong>
-          <span>
-            Choose the quantity that works for your household.
-          </span>
-        </div>
-
       </div>
+    </section>
 
-      {% if egg_product != blank %}
-        <a class="sbf-button" href="{{ egg_product.url }}">
-          Choose Your Egg Subscription
-        </a>
-      {% endif %}
-
+    <section class="sbf-egg-final">
+      <div class="sbf-egg-final-inner">
+        <div class="sbf-eyebrow">Spring Bottom Farm</div>
+        <h2>Fresh eggs, on your schedule.</h2>
+        <p>Start your Egg Subscription and make sure there's always a fresh supply waiting for you.</p>
+        <a class="sbf-button" href="{{ egg_product_search_url }}">Start Your Egg Subscription</a>
+      </div>
+    </section>
+  </div>
+{% else %}
+  <div class="sbf-page">
+    <div class="sbf-wrap">
+      <h1>{{ page.title }}</h1>
+      <div class="sbf-page-content">{{ page.content }}</div>
     </div>
-
-  </section>
-
-
-  <section class="sbf-egg-gallery">
-
-    <div class="sbf-egg-gallery-inner">
-
-      <div class="sbf-eyebrow" style="text-align:center;">
-        From Our Farm
-      </div>
-
-      <h2>
-        See where your eggs come from.
-      </h2>
-
-      <div class="sbf-egg-gallery-grid">
-
-        {% if table_image != blank %}
-          <img
-            src="{{ table_image | image_url: width: 1000 }}"
-            alt="Egg cartons at Spring Bottom Farm"
-            loading="lazy"
-          >
-        {% endif %}
-
-        {% if carton_image != blank %}
-          <img
-            src="{{ carton_image | image_url: width: 1000 }}"
-            alt="Fresh eggs in a carton"
-            loading="lazy"
-          >
-        {% endif %}
-
-        {% if cooler_image != blank %}
-          <img
-            src="{{ cooler_image | image_url: width: 1000 }}"
-            alt="Fresh eggs prepared at Spring Bottom Farm"
-            loading="lazy"
-          >
-        {% endif %}
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <section class="sbf-egg-final">
-
-    <div class="sbf-egg-final-inner">
-
-      <div class="sbf-eyebrow">
-        Spring Bottom Farm
-      </div>
-
-      <h2>
-        Fresh eggs, on your schedule.
-      </h2>
-
-      <p>
-        Start your Egg Subscription and make sure there's always
-        a fresh dozen waiting for you.
-      </p>
-
-      {% if egg_product != blank %}
-        <a class="sbf-button" href="{{ egg_product.url }}">
-          Start Your Egg Subscription
-        </a>
-      {% endif %}
-
-    </div>
-
-  </section>
-
-</div>
+  </div>
+{% endif %}
