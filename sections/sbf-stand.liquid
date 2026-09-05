@@ -1,0 +1,64 @@
+<section class="sbf-stand sbf-section">
+  <div class="sbf-wrap sbf-stand-grid">
+
+    <div>
+      {% if section.settings.image %}
+        {{ section.settings.image
+          | image_url: width: 1600
+          | image_tag: loading: 'lazy'
+        }}
+      {% endif %}
+    </div>
+
+    <div class="sbf-stand-copy">
+      <div class="sbf-eyebrow">{{ section.settings.eyebrow }}</div>
+
+      <h2>{{ section.settings.heading }}</h2>
+
+      <p>{{ section.settings.text }}</p>
+
+      <div class="sbf-stand-address">
+        <div class="sbf-stand-pin">📍</div>
+        <div>
+          <strong>VISIT US AT THE FARM</strong>
+          <br>
+          21206 Ridge Road
+          <br>
+          Freeland, MD 21053
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Farm Stand",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Stand image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "THE FARM STAND"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Visit the Farm Stand"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Our self-serve farm stand is open 24/7. Stop by anytime for pasture-raised eggs, seasonal produce, firewood, Italian ice, flowers, and other farm goods."
+    }
+  ]
+}
+{% endschema %}

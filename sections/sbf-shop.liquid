@@ -1,0 +1,80 @@
+<section class="sbf-shop sbf-section">
+  <div class="sbf-wrap">
+    <div class="sbf-heading-row"><h2>{{ section.settings.heading }}</h2><a href="{{ routes.collections_url }}">Shop all</a></div>
+    <div class="sbf-card-grid">
+      {% for block in section.blocks %}
+        <a class="sbf-card" href="{{ block.settings.link | default: routes.collections_url }}" {{ block.shopify_attributes }}>
+          {% if block.settings.image %}{{ block.settings.image | image_url: width: 1000 | image_tag: loading:'lazy' }}{% else %}<div class="sbf-placeholder"></div>{% endif %}
+          <div class="sbf-card-shade"></div>
+          <div class="sbf-card-copy"><h3>{{ block.settings.title }}</h3><p>{{ block.settings.description }}</p></div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Shop Categories",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop the Farm"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Farm Fresh Eggs"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Fresh from our hens."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop Categories",
+      "blocks": [
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

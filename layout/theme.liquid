@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% if page_title %}{{ page_title }}{% else %}{{ shop.name }}{% endif %}</title>
+  {{ content_for_header }}
+  {{ 'sbf.css' | asset_url | stylesheet_tag }}
+</head>
+<body>
+  {% section 'sbf-header' %}
+  <main id="MainContent">{{ content_for_layout }}</main>
+  {% section 'sbf-footer' %}
+</body>
+</html>

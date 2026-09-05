@@ -1,0 +1,20 @@
+<section class="sbf-story sbf-section">
+  <div class="sbf-wrap sbf-story-grid">
+    <div>{% if section.settings.image %}{{ section.settings.image | image_url: width:1500 | image_tag: loading:'lazy' }}{% else %}<div class="sbf-placeholder sbf-story-placeholder"></div>{% endif %}</div>
+    <div>
+      <div class="sbf-eyebrow">{{ section.settings.eyebrow }}</div>
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.text }}</p>
+      <a class="sbf-link" href="{{ section.settings.button_link | default: '/pages/our-farm' }}">{{ section.settings.button_label }}</a>
+    </div>
+  </div>
+</section>
+{% schema %}
+{"name":"Our Farm Story","settings":[
+{"type":"image_picker","id":"image","label":"Farm image"},
+{"type":"text","id":"eyebrow","label":"Eyebrow","default":"OUR FARM"},
+{"type":"text","id":"heading","label":"Heading","default":"A farm built around good food and good neighbors."},
+{"type":"textarea","id":"text","label":"Text","default":"Spring Bottom Farm is our family farm in southern York County, Pennsylvania. We're raising animals, growing seasonal food, and building something our community can enjoy."},
+{"type":"text","id":"button_label","label":"Button","default":"Our Story"},
+{"type":"url","id":"button_link","label":"Button link"}
+]}{% endschema %}
