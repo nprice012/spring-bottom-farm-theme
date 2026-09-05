@@ -1,8 +1,4 @@
-{% assign egg_product = blank %}
-
-{% capture egg_search_url %}
-  {{ routes.search_url }}?q=Pasture-Raised%20Eggs&type=product
-{% endcapture %}
+{% assign egg_subscription_url = '/pages/egg-subscription' %}
 
 <style>
   .sbf-intro {
@@ -59,9 +55,7 @@
 </style>
 
 <section class="sbf-intro">
-
   <div class="sbf-intro-inner">
-
     <div class="sbf-intro-eyebrow">
       Spring Bottom Farm
     </div>
@@ -77,15 +71,10 @@
       subscriptions and never run out of eggs again.
     </p>
 
-    <a
-      class="sbf-intro-button"
-      href="{{ egg_search_url }}"
-    >
+    <a class="sbf-intro-button" href="{{ egg_subscription_url }}">
       Start Your Egg Subscription
     </a>
-
   </div>
-
 </section>
 
 {% schema %}
