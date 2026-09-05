@@ -7,30 +7,11 @@
       <a href="{{ routes.all_products_collection_url }}">Shop</a>
       <a href="/pages/egg-subscription">Egg Subscription</a>
       <a href="{{ routes.root_url }}#our-farm">Our Farm</a>
-      <a href="{{ routes.root_url }}#farm-stand" data-sbf-scroll="farm-stand">Farm Stand</a>
+      <a href="{{ routes.root_url }}?scroll=farm-stand" data-sbf-scroll="farm-stand">Farm Stand</a>
       <a href="mailto:SpringBottomFarmMD@gmail.com">Contact</a>
       <a href="{{ routes.cart_url }}">Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</a>
     </nav>
   </div>
 </header>
-
-<script>
-  (function () {
-    var link = document.querySelector('[data-sbf-scroll="farm-stand"]');
-    if (!link) return;
-
-    link.addEventListener('click', function (event) {
-      var target = document.getElementById('farm-stand');
-      var homePath = '{{ routes.root_url }}';
-      var currentPath = window.location.pathname;
-
-      if (target && currentPath === homePath) {
-        event.preventDefault();
-        history.replaceState(null, '', homePath + '#farm-stand');
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  })();
-</script>
 
 {% schema %}{"name":"Spring Bottom Header","settings":[]} {% endschema %}
