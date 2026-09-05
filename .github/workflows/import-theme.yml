@@ -1,46 +1,10 @@
-name: Import Shopify Theme
+name: Theme Import Helper
 
 on:
-  push:
-    branches: [main]
-
-permissions:
-  contents: write
+  workflow_dispatch:
 
 jobs:
-  import:
-    if: ${{ !contains(github.event.head_commit.message, 'Expand Shopify theme') }}
+  placeholder:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Expand Shopify theme export
-        shell: bash
-        run: |
-          set -euo pipefail
-          zip_file=$(find . -maxdepth 1 -type f -name '*.zip' | head -n 1)
-          test -n "$zip_file"
-          mkdir -p .theme_extract
-          unzip -q "$zip_file" -d .theme_extract
-          theme_root=$(find .theme_extract -type f -path '*/layout/theme.liquid' -print -quit | sed 's#/layout/theme.liquid$##')
-          test -n "$theme_root"
-          find "$theme_root" -mindepth 1 -maxdepth 1 -exec cp -R {} . \;
-          rm -rf .theme_extract
-          rm -f "$zip_file"
-
-      - name: Inspect hero
-        shell: bash
-        run: |
-          set -euo pipefail
-          test -f sections/sbf-hero.liquid
-          cp sections/sbf-hero.liquid .hero-inspection.txt
-
-      - name: Commit imported theme
-        shell: bash
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A
-          git commit -m 'Expand Shopify theme and inspect hero' || exit 0
-          git push
+      - run: echo "Theme import is complete; no automatic import is required."
