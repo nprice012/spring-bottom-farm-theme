@@ -23,29 +23,39 @@ jobs:
           test -n "$zip_file"
           mkdir -p .theme_extract
           unzip -q "$zip_file" -d .theme_extract
-          find .theme_extract -type f -print0 | while IFS= read -r -d '' file; do
-            rel="${file#.theme_extract/}"
-            mkdir -p "$(dirname "$rel")"
-            cp "$file" "$rel"
-          done
+          theme_root=$(find .theme_extract -type f -path '*/layout/theme.liquid' -print -quit | sed 's#/layout/theme.liquid$##')
+          test -n "$theme_root"
+          find "$theme_root" -mindepth 1 -maxdepth 1 -exec cp -R {} . \;
           rm -rf .theme_extract
           rm -f "$zip_file"
 
       - name: Link hero to Egg Subscription landing page
         shell: bash
         run: |
+          set -euo pipefail
+          path='sections/sbf-hero.liquid'
+          test -f "$path"
           python3 - <<'PY'
           from pathlib import Path
           import re
           path = Path('sections/sbf-hero.liquid')
-          if not path.exists():
-              raise SystemExit('sections/sbf-hero.liquid was not found after theme import')
           text = path.read_text()
-          pattern = re.compile(r'(<a\b[^>]*\bhref=["\'])([^"\']*)(["\'][^>]*>\s*Start Your Egg Subscription\s*</a>)', re.I | re.S)
-          new_text, count = pattern.subn(r'\g<1>/pages/egg-subscription\g<3>', text, count=1)
-          if count != 1:
-              raise SystemExit(f'Could not uniquely locate the hero Egg Subscription button (matches={count})')
-          path.write_text(new_text)
+          if '/pages/egg-subscription' in text:
+              print('Hero already points to Egg Subscription landing page.')
+              raise SystemExit(0)
+          candidates = []
+          for match in re.finditer(r'<a\b[^>]*href=["\'][^"\']*["\'][^>]*>.*?</a>', text, re.I | re.S):
+              block = match.group(0)
+              visible = re.sub(r'<[^>]+>', ' ', block).lower()
+              if 'egg subscription' in visible:
+                  candidates.append(match)
+          if len(candidates) != 1:
+              raise SystemExit(f'Could not uniquely locate hero Egg Subscription button (matches={len(candidates)})')
+          match = candidates[0]
+          block = match.group(0)
+          new_block = re.sub(r'(href=["\'])[^"\']*(["\'])', r'\g<1>/pages/egg-subscription\g<2>', block, count=1, flags=re.I)
+          path.write_text(text[:match.start()] + new_block + text[match.end():])
+          print('Hero linked to /pages/egg-subscription')
           PY
 
       - name: Commit imported theme
