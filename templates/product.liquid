@@ -1,13 +1,41 @@
-{% assign product_image = images['IMG_8146.jpg'] %}
+{% assign egg_photo_1 = images['IMG_8146.jpg'] %}
+{% assign egg_photo_2 = images['IMG_7892.jpg'] %}
+{% assign egg_photo_3 = images['IMG_8147.jpg'] %}
+{% assign egg_photo_4 = images['IMG_8177_2.jpg'] %}
 
 <div class="sbf-product-page">
   <div class="sbf-wrap sbf-product-grid">
-    <div class="sbf-product-image-wrap">
-      {% if product_image != blank %}
-        <img class="sbf-product-image" src="{{ product_image | image_url: width: 1800 }}" alt="Pasture-Raised Eggs from Spring Bottom Farm" loading="eager">
-      {% elsif product.featured_image %}
-        {{ product.featured_image | image_url: width: 1800 | image_tag: loading: 'eager', alt: product.title, class: 'sbf-product-image' }}
-      {% endif %}
+    <div class="sbf-product-gallery">
+      <div class="sbf-product-image-wrap">
+        {% if egg_photo_1 != blank %}
+          <img id="SbfProductMainImage" class="sbf-product-image" src="{{ egg_photo_1 | image_url: width: 1800 }}" alt="Pasture-raised brown eggs from Spring Bottom Farm" loading="eager">
+        {% elsif product.featured_image %}
+          {{ product.featured_image | image_url: width: 1800 | image_tag: loading: 'eager', alt: product.title, class: 'sbf-product-image', id: 'SbfProductMainImage' }}
+        {% endif %}
+      </div>
+
+      <div class="sbf-product-thumbnails" aria-label="Egg product photos">
+        {% if egg_photo_1 != blank %}
+          <button type="button" class="sbf-product-thumb is-active" data-image="{{ egg_photo_1 | image_url: width: 1800 }}" data-alt="Pasture-raised brown eggs from Spring Bottom Farm" aria-label="View egg photo 1">
+            <img src="{{ egg_photo_1 | image_url: width: 500 }}" alt="Pasture-raised brown eggs" loading="eager">
+          </button>
+        {% endif %}
+        {% if egg_photo_2 != blank %}
+          <button type="button" class="sbf-product-thumb" data-image="{{ egg_photo_2 | image_url: width: 1800 }}" data-alt="Fresh brown egg from Spring Bottom Farm" aria-label="View egg photo 2">
+            <img src="{{ egg_photo_2 | image_url: width: 500 }}" alt="Fresh brown egg" loading="lazy">
+          </button>
+        {% endif %}
+        {% if egg_photo_3 != blank %}
+          <button type="button" class="sbf-product-thumb" data-image="{{ egg_photo_3 | image_url: width: 1800 }}" data-alt="Egg cartons packed at Spring Bottom Farm" aria-label="View egg photo 3">
+            <img src="{{ egg_photo_3 | image_url: width: 500 }}" alt="Egg cartons packed at the farm" loading="lazy">
+          </button>
+        {% endif %}
+        {% if egg_photo_4 != blank %}
+          <button type="button" class="sbf-product-thumb" data-image="{{ egg_photo_4 | image_url: width: 1800 }}" data-alt="Fresh egg cartons from Spring Bottom Farm" aria-label="View egg photo 4">
+            <img src="{{ egg_photo_4 | image_url: width: 500 }}" alt="Fresh egg cartons" loading="lazy">
+          </button>
+        {% endif %}
+      </div>
     </div>
 
     <div class="sbf-product-copy">
@@ -58,27 +86,58 @@
         </button>
       {% endform %}
 
-      <p class="sbf-product-note">
-        Choose a subscription option above for recurring egg deliveries or pickups when available.
-      </p>
+      <div class="sbf-product-highlights">
+        <div class="sbf-product-highlight"><strong>Pasture-Raised</strong><span>Hens spend their days outdoors with room to roam.</span></div>
+        <div class="sbf-product-highlight"><strong>Local Farm</strong><span>Raised, collected, and packed right here in Freeland, Maryland.</span></div>
+        <div class="sbf-product-highlight"><strong>Fresh &amp; Natural</strong><span>Fresh brown eggs collected and packed by hand.</span></div>
+      </div>
     </div>
   </div>
 </div>
 
+<script>
+  (function() {
+    var mainImage = document.getElementById('SbfProductMainImage');
+    var thumbnails = document.querySelectorAll('.sbf-product-thumb');
+    if (!mainImage || !thumbnails.length) return;
+
+    thumbnails.forEach(function(button) {
+      button.addEventListener('click', function() {
+        mainImage.src = button.getAttribute('data-image');
+        mainImage.alt = button.getAttribute('data-alt') || 'Pasture-raised brown eggs from Spring Bottom Farm';
+        thumbnails.forEach(function(item) { item.classList.remove('is-active'); });
+        button.classList.add('is-active');
+      });
+    });
+  })();
+</script>
+
 <style>
-  .sbf-product-page{background:#f7f4ed;color:#243126;padding:80px 24px}
-  .sbf-product-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:70px;align-items:center}
-  .sbf-product-image-wrap{width:100%;max-height:680px;overflow:hidden;background:#eee9dc}
-  .sbf-product-image{width:100%;height:auto;max-height:680px;object-fit:contain;display:block}
-  .sbf-product-copy{padding:30px 0}
-  .sbf-product-copy h1{font-size:clamp(42px,6vw,72px);line-height:1;margin:0 0 20px;letter-spacing:-.04em}
-  .sbf-product-price{font-size:24px;font-weight:700;margin-bottom:25px}
-  .sbf-product-description{font-size:18px;line-height:1.7;margin-bottom:30px}
-  .sbf-product-form{display:flex;flex-direction:column;gap:10px;max-width:500px}
-  .sbf-product-form label{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:12px}
-  .sbf-product-form select,.sbf-product-form input[type=number]{width:100%;padding:14px;border:1px solid #b9b4a7;background:#fff;font:inherit}
-  .sbf-product-form button{border:0;cursor:pointer;margin-top:18px}
+  .sbf-product-page{background:#f7f4ed;color:#243126;padding:70px 24px 95px}
+  .sbf-product-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:70px;align-items:start}
+  .sbf-product-gallery{min-width:0}
+  .sbf-product-image-wrap{width:100%;aspect-ratio:1/1;overflow:hidden;background:#eee9dc}
+  .sbf-product-image{width:100%;height:100%;object-fit:cover;display:block}
+  .sbf-product-thumbnails{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}
+  .sbf-product-thumb{padding:0;border:2px solid transparent;background:transparent;cursor:pointer;overflow:hidden;aspect-ratio:1/1}
+  .sbf-product-thumb.is-active{border-color:#243126}
+  .sbf-product-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .sbf-product-copy{padding:18px 0}
+  .sbf-product-copy h1{font-size:clamp(42px,5.5vw,70px);line-height:.98;margin:0 0 22px;letter-spacing:-.04em}
+  .sbf-product-price{font-size:26px;font-weight:700;margin-bottom:25px}
+  .sbf-product-description{font-size:18px;line-height:1.65;margin-bottom:28px}
+  .sbf-product-form{display:flex;flex-direction:column;gap:10px;max-width:560px;border-top:1px solid #c9c3b6;padding-top:18px}
+  .sbf-product-form label{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:10px}
+  .sbf-product-form select,.sbf-product-form input[type=number]{width:100%;padding:15px;border:1px solid #aaa69b;background:#fff;color:#243126;font:inherit}
+  .sbf-product-form button{width:100%;border:0;cursor:pointer;margin-top:18px}
   .sbf-product-form button:disabled{opacity:.5;cursor:not-allowed}
-  .sbf-product-note{font-size:14px;line-height:1.6;max-width:500px;margin-top:25px}
-  @media screen and (max-width:749px){.sbf-product-page{padding:45px 20px}.sbf-product-grid{grid-template-columns:1fr;gap:25px}.sbf-product-image-wrap{max-height:none}.sbf-product-image{max-height:none}.sbf-product-copy{padding:0}}
+  .sbf-product-highlights{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:42px;padding-top:30px;border-top:1px solid #c9c3b6}
+  .sbf-product-highlight strong{display:block;font-size:16px;margin-bottom:8px}
+  .sbf-product-highlight span{display:block;font-size:13px;line-height:1.5}
+  @media screen and (max-width:749px){
+    .sbf-product-page{padding:40px 20px 65px}
+    .sbf-product-grid{grid-template-columns:1fr;gap:35px}
+    .sbf-product-copy{padding:0}
+    .sbf-product-highlights{grid-template-columns:1fr;gap:22px}
+  }
 </style>
