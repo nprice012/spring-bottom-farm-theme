@@ -7,7 +7,7 @@
 
   {% assign egg_product = blank %}
   {% for product in collections.all.products %}
-    {% if product.title == 'Pasture-Raised Eggs' %}
+    {% if product.title contains 'Pasture-Raised Eggs' %}
       {% assign egg_product = product %}
       {% break %}
     {% endif %}
@@ -61,6 +61,8 @@
       .sbf-egg-feature-image{min-height:400px}
       .sbf-egg-options,.sbf-egg-gallery-grid{grid-template-columns:1fr}
     }
+    #farm-stand{scroll-margin-top:110px}
+    #our-farm{scroll-margin-top:110px}
   </style>
 
   <div class="sbf-egg-page">
@@ -82,19 +84,8 @@
       <p>Choose how often you want your eggs and how many you need. We'll have them ready for you on schedule.</p>
     </section>
 
-    {% if egg_image != blank %}
-      <section class="sbf-egg-feature">
-        <div class="sbf-egg-feature-image"><img src="{{ egg_image | image_url: width:1400 }}" alt="Fresh brown egg from Spring Bottom Farm" loading="lazy"></div>
-        <div class="sbf-egg-feature-content"><div class="sbf-eyebrow">Farm Fresh</div><h2>Eggs from our farm to your table.</h2><p>Our hens spend their days outdoors on pasture, and we collect eggs fresh from the flock.</p></div>
-      </section>
-    {% endif %}
-
-    {% if cooler_image != blank %}
-      <section class="sbf-egg-feature reverse">
-        <div class="sbf-egg-feature-image"><img src="{{ cooler_image | image_url: width:1400 }}" alt="Fresh eggs packed at Spring Bottom Farm" loading="lazy"></div>
-        <div class="sbf-egg-feature-content"><div class="sbf-eyebrow">Simple & Convenient</div><h2>Your eggs are ready when you need them.</h2><p>Select your preferred schedule and quantity. We'll take care of the rest.</p></div>
-      </section>
-    {% endif %}
+    {% if egg_image != blank %}<section class="sbf-egg-feature"><div class="sbf-egg-feature-image"><img src="{{ egg_image | image_url: width:1400 }}" alt="Fresh brown egg from Spring Bottom Farm" loading="lazy"></div><div class="sbf-egg-feature-content"><div class="sbf-eyebrow">Farm Fresh</div><h2>Eggs from our farm to your table.</h2><p>Our hens spend their days outdoors on pasture, and we collect eggs fresh from the flock.</p></div></section>{% endif %}
+    {% if cooler_image != blank %}<section class="sbf-egg-feature reverse"><div class="sbf-egg-feature-image"><img src="{{ cooler_image | image_url: width:1400 }}" alt="Fresh eggs packed at Spring Bottom Farm" loading="lazy"></div><div class="sbf-egg-feature-content"><div class="sbf-eyebrow">Simple & Convenient</div><h2>Your eggs are ready when you need them.</h2><p>Select your preferred schedule and quantity. We'll take care of the rest.</p></div></section>{% endif %}
 
     <section class="sbf-egg-plan">
       <div class="sbf-egg-plan-inner">
@@ -110,32 +101,9 @@
       </div>
     </section>
 
-    <section class="sbf-egg-gallery">
-      <div class="sbf-egg-gallery-inner">
-        <div class="sbf-eyebrow" style="text-align:center;">From Our Farm</div>
-        <h2>See where your eggs come from.</h2>
-        <div class="sbf-egg-gallery-grid">
-          {% if table_image != blank %}<img src="{{ table_image | image_url: width:1000 }}" alt="Egg cartons at Spring Bottom Farm" loading="lazy">{% endif %}
-          {% if carton_image != blank %}<img src="{{ carton_image | image_url: width:1000 }}" alt="Fresh eggs in a carton" loading="lazy">{% endif %}
-          {% if cooler_image != blank %}<img src="{{ cooler_image | image_url: width:1000 }}" alt="Fresh eggs prepared at Spring Bottom Farm" loading="lazy">{% endif %}
-        </div>
-      </div>
-    </section>
-
-    <section class="sbf-egg-final">
-      <div class="sbf-egg-final-inner">
-        <div class="sbf-eyebrow">Spring Bottom Farm</div>
-        <h2>Fresh eggs, on your schedule.</h2>
-        <p>Start your Egg Subscription and make sure there's always a fresh supply waiting for you.</p>
-        <a class="sbf-button" href="{{ egg_subscription_url }}">Start Your Egg Subscription</a>
-      </div>
-    </section>
+    <section class="sbf-egg-gallery"><div class="sbf-egg-gallery-inner"><div class="sbf-eyebrow" style="text-align:center;">From Our Farm</div><h2>See where your eggs come from.</h2><div class="sbf-egg-gallery-grid">{% if table_image != blank %}<img src="{{ table_image | image_url: width:1000 }}" alt="Egg cartons at Spring Bottom Farm" loading="lazy">{% endif %}{% if carton_image != blank %}<img src="{{ carton_image | image_url: width:1000 }}" alt="Fresh eggs in a carton" loading="lazy">{% endif %}{% if cooler_image != blank %}<img src="{{ cooler_image | image_url: width:1000 }}" alt="Fresh eggs prepared at Spring Bottom Farm" loading="lazy">{% endif %}</div></div></section>
+    <section class="sbf-egg-final"><div class="sbf-egg-final-inner"><div class="sbf-eyebrow">Spring Bottom Farm</div><h2>Fresh eggs, on your schedule.</h2><p>Start your Egg Subscription and make sure there's always a fresh supply waiting for you.</p><a class="sbf-button" href="{{ egg_subscription_url }}">Start Your Egg Subscription</a></div></section>
   </div>
 {% else %}
-  <div class="sbf-page">
-    <div class="sbf-wrap">
-      <h1>{{ page.title }}</h1>
-      <div class="sbf-page-content">{{ page.content }}</div>
-    </div>
-  </div>
+  <div class="sbf-page"><div class="sbf-wrap"><h1>{{ page.title }}</h1><div class="sbf-page-content">{{ page.content }}</div></div></div>
 {% endif %}
