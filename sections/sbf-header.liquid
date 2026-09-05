@@ -1,12 +1,14 @@
 <header class="sbf-header">
   <div class="sbf-wrap sbf-header-inner">
-<a class="sbf-logo" href="{{ routes.root_url }}">
-  <img src="{{ 'sbf-logo.PNG' | asset_url }}" alt="Spring Bottom Farm">
-</a>    <nav class="sbf-nav">
-      <a href="{{ routes.collections_url }}">Shop</a>
-<a href="/pages/egg-subscription">Egg Subscription</a>      <a href="/pages/our-farm">Our Farm</a>
-      <a href="/pages/farm-stand">Farm Stand</a>
-      <a href="/pages/contact">Contact</a>
+    <a class="sbf-logo" href="{{ routes.root_url }}">
+      <img src="{{ 'sbf-logo.PNG' | asset_url }}" alt="Spring Bottom Farm">
+    </a>
+    <nav class="sbf-nav">
+      <a href="{{ routes.all_products_collection_url }}">Shop</a>
+      <a href="/pages/egg-subscription">Egg Subscription</a>
+      <a href="{{ routes.root_url }}#our-farm">Our Farm</a>
+      <a href="{{ routes.root_url }}#farm-stand">Farm Stand</a>
+      <a href="mailto:SpringBottomFarmMD@gmail.com">Contact</a>
       <a href="{{ routes.cart_url }}">Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</a>
     </nav>
   </div>
