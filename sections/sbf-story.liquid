@@ -1,11 +1,11 @@
-<section class="sbf-story sbf-section">
+<section id="our-farm" class="sbf-story sbf-section">
   <div class="sbf-wrap sbf-story-grid">
     <div>{% if section.settings.image %}{{ section.settings.image | image_url: width:1500 | image_tag: loading:'lazy' }}{% else %}<div class="sbf-placeholder sbf-story-placeholder"></div>{% endif %}</div>
     <div>
       <div class="sbf-eyebrow">{{ section.settings.eyebrow }}</div>
       <h2>{{ section.settings.heading }}</h2>
       <p>{{ section.settings.text }}</p>
-      <a class="sbf-link" href="{{ section.settings.button_link | default: '/pages/our-farm' }}">{{ section.settings.button_label }}</a>
+      <a class="sbf-link" href="{{ section.settings.button_link | default: '#our-farm' }}">{{ section.settings.button_label }}</a>
     </div>
   </div>
 </section>
