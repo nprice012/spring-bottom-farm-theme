@@ -1,0 +1,22 @@
+<section class="sbf-feature">
+  <div class="sbf-feature-image">
+    {% if section.settings.image %}{{ section.settings.image | image_url: width: 1600 | image_tag: loading:'lazy' }}{% else %}<div class="sbf-placeholder"></div>{% endif %}
+  </div>
+  <div class="sbf-feature-copy">
+    <div>
+      <div class="sbf-eyebrow">{{ section.settings.eyebrow }}</div>
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.text }}</p>
+      <a class="sbf-btn sbf-btn-light" href="{{ section.settings.button_link | default: '/pages/egg-club' }}">{{ section.settings.button_label }}</a>
+    </div>
+  </div>
+</section>
+{% schema %}
+{"name":"Egg Club Feature","settings":[
+{"type":"image_picker","id":"image","label":"Image"},
+{"type":"text","id":"eyebrow","label":"Eyebrow","default":"THE EGG CLUB"},
+{"type":"text","id":"heading","label":"Heading","default":"Never run out of farm fresh eggs."},
+{"type":"textarea","id":"text","label":"Text","default":"Reserve your fresh eggs every week with the Spring Bottom Farm Egg Club."},
+{"type":"text","id":"button_label","label":"Button","default":"Join the Egg Club"},
+{"type":"url","id":"button_link","label":"Button link"}
+]}{% endschema %}

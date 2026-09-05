@@ -1,0 +1,101 @@
+{% assign egg_product = blank %}
+
+{% capture egg_search_url %}
+  {{ routes.search_url }}?q=Pasture-Raised%20Eggs&type=product
+{% endcapture %}
+
+<style>
+  .sbf-intro {
+    padding: 100px 24px;
+    background: #f7f4ed;
+    color: #243126;
+  }
+
+  .sbf-intro-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .sbf-intro-eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .sbf-intro h2 {
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: 1;
+    letter-spacing: -.04em;
+    margin: 0 0 25px;
+  }
+
+  .sbf-intro p {
+    max-width: 720px;
+    margin: 0 auto 35px;
+    font-size: 19px;
+    line-height: 1.7;
+  }
+
+  .sbf-intro-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 17px 30px;
+    background: #243126;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .sbf-intro-button:hover {
+    opacity: .82;
+  }
+</style>
+
+<section class="sbf-intro">
+
+  <div class="sbf-intro-inner">
+
+    <div class="sbf-intro-eyebrow">
+      Spring Bottom Farm
+    </div>
+
+    <h2>
+      Fresh Eggs.<br>
+      On Your Schedule.
+    </h2>
+
+    <p>
+      Get fresh, pasture-raised eggs from our farm on a schedule
+      that works for you. Choose weekly or every-other-week
+      subscriptions and never run out of eggs again.
+    </p>
+
+    <a
+      class="sbf-intro-button"
+      href="{{ egg_search_url }}"
+    >
+      Start Your Egg Subscription
+    </a>
+
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Egg Subscription",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Egg Subscription"
+    }
+  ]
+}
+{% endschema %}

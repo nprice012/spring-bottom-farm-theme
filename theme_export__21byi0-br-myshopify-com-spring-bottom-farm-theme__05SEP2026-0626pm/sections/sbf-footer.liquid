@@ -1,0 +1,21 @@
+<footer class="sbf-footer">
+  <div class="sbf-wrap sbf-footer-grid">
+    <div>
+      <div class="sbf-footer-brand">{{ shop.name }}</div>
+      <p>Fresh eggs, seasonal produce, and farm-made goods from our family farm.</p>
+    </div>
+    <div>
+      <h3>Explore</h3>
+      <a href="{{ routes.collections_url }}">Shop</a>
+      <a href="/pages/egg-club">Egg Club</a>
+      <a href="/pages/our-farm">Our Farm</a>
+      <a href="/pages/farm-stand">Farm Stand</a>
+    </div>
+    <div>
+      <h3>Stay Connected</h3>
+      <p>Follow along for what's fresh at Spring Bottom Farm.</p>
+    </div>
+  </div>
+  <div class="sbf-wrap sbf-footer-bottom">© {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</div>
+</footer>
+{% schema %}{"name":"Spring Bottom Footer","settings":[]} {% endschema %}
