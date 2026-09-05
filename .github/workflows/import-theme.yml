@@ -1,0 +1,58 @@
+name: Import Shopify Theme
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    if: ${{ !contains(github.event.head_commit.message, 'Expand Shopify theme') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Expand Shopify theme export
+        shell: bash
+        run: |
+          set -euo pipefail
+          zip_file=$(find . -maxdepth 1 -type f -name '*.zip' | head -n 1)
+          test -n "$zip_file"
+          mkdir -p .theme_extract
+          unzip -q "$zip_file" -d .theme_extract
+          find .theme_extract -type f -print0 | while IFS= read -r -d '' file; do
+            rel="${file#.theme_extract/}"
+            mkdir -p "$(dirname "$rel")"
+            cp "$file" "$rel"
+          done
+          rm -rf .theme_extract
+          rm -f "$zip_file"
+
+      - name: Link hero to Egg Subscription landing page
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          path = Path('sections/sbf-hero.liquid')
+          if not path.exists():
+              raise SystemExit('sections/sbf-hero.liquid was not found after theme import')
+          text = path.read_text()
+          pattern = re.compile(r'(<a\b[^>]*\bhref=["\'])([^"\']*)(["\'][^>]*>\s*Start Your Egg Subscription\s*</a>)', re.I | re.S)
+          new_text, count = pattern.subn(r'\g<1>/pages/egg-subscription\g<3>', text, count=1)
+          if count != 1:
+              raise SystemExit(f'Could not uniquely locate the hero Egg Subscription button (matches={count})')
+          path.write_text(new_text)
+          PY
+
+      - name: Commit imported theme
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Expand Shopify theme and link Egg Subscription hero' || exit 0
+          git push
