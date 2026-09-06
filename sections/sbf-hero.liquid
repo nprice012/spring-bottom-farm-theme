@@ -8,9 +8,10 @@
   </div>
   <div class="sbf-hero-overlay"></div>
   <div class="sbf-wrap sbf-hero-content">
-<div class="sbf-hero-logo"><img src="{{ 'sbf-logo.PNG' | asset_url }}" alt="Spring Bottom Farm"></div>    <h1>{{ section.settings.heading }}</h1>
+    <div class="sbf-hero-logo"><img src="{{ 'sbf-logo.PNG' | asset_url }}" alt="Spring Bottom Farm"></div>
+    <h1>{{ section.settings.heading }}</h1>
     <p>{{ section.settings.text }}</p>
-    <a class="sbf-btn sbf-btn-light" href="/pages/egg-subscription">{{ section.settings.button_label }}</a>
+    <a class="sbf-btn sbf-btn-light" href="{{ section.settings.button_link | default: '/pages/egg-subscription' }}">{{ section.settings.button_label }}</a>
   </div>
 </section>
 {% schema %}
