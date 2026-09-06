@@ -16,8 +16,8 @@
         "eyebrow": "SPRING BOTTOM FARM",
         "heading": "Good local food starts here.",
         "text": "Fresh eggs, seasonal produce, beef, poultry, and farm-made goods from our family farm in Northern Baltimore County.",
-        "button_label": "START YOUR EGG SUBSCRIPTION",
-        "button_link": "/pages/egg-subscription"
+        "button_label": "SHOP OUR PRODUCTS",
+        "button_link": "/collections/all"
       }
     },
     "intro": {
@@ -73,16 +73,8 @@
           }
         }
       },
-      "block_order": [
-        "category_BDCUNY",
-        "eggs",
-        "produce",
-        "favorites",
-        "bakery"
-      ],
-      "settings": {
-        "heading": "Shop the Farm"
-      }
+      "block_order": ["category_BDCUNY","eggs","produce","favorites","bakery"],
+      "settings": {"heading":"Shop the Farm"}
     },
     "eggclub": {
       "type": "sbf-feature",
@@ -126,13 +118,5 @@
       }
     }
   },
-  "order": [
-    "hero",
-    "intro",
-    "shop",
-    "eggclub",
-    "story",
-    "stand",
-    "cta"
-  ]
+  "order":["hero","intro","shop","eggclub","story","stand","cta"]
 }
