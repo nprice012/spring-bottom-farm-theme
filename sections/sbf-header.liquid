@@ -7,7 +7,7 @@
       <a href="{{ routes.all_products_collection_url }}">Shop</a>
       <a href="/pages/egg-subscription">Egg Subscription</a>
       <a href="{{ routes.root_url }}#our-farm">Our Farm</a>
-      <a href="{{ routes.root_url }}" onclick="var t=document.getElementById('farm-stand'); if(t){event.preventDefault(); t.scrollIntoView({behavior:'smooth',block:'start'});}">Farm Stand</a>
+      <a href="{{ routes.root_url }}?scroll=farm-stand" onclick="var el=document.getElementById('farm-stand'); if (el) { event.preventDefault(); el.scrollIntoView({behavior:'smooth',block:'start'}); }">Farm Stand</a>
       <a href="mailto:SpringBottomFarmMD@gmail.com">Contact</a>
       <a href="{{ routes.cart_url }}">Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</a>
     </nav>
