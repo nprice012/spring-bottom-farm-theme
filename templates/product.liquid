@@ -1,41 +1,50 @@
-{% assign egg_photo_1 = images['IMG_8146.jpg'] %}
-{% assign egg_photo_2 = images['IMG_7892.jpg'] %}
-{% assign egg_photo_3 = images['IMG_8147.jpg'] %}
-{% assign egg_photo_4 = images['IMG_8177_2.jpg'] %}
+{% assign is_egg_product = false %}
+{% if product.title == 'Pasture-Raised Eggs' %}
+  {% assign is_egg_product = true %}
+{% endif %}
+
+{% if is_egg_product %}
+  {% assign product_photo_1 = images['IMG_8146.jpg'] %}
+  {% assign product_photo_2 = images['IMG_7892.jpg'] %}
+  {% assign product_photo_3 = images['IMG_8147.jpg'] %}
+  {% assign product_photo_4 = images['IMG_8177_2.jpg'] %}
+{% endif %}
 
 <div class="sbf-product-page">
   <div class="sbf-wrap sbf-product-grid">
     <div class="sbf-product-gallery">
       <div class="sbf-product-image-wrap">
-        {% if egg_photo_1 != blank %}
-          <img id="SbfProductMainImage" class="sbf-product-image" src="{{ egg_photo_1 | image_url: width: 1800 }}" alt="Pasture-raised brown eggs from Spring Bottom Farm" loading="eager">
+        {% if is_egg_product and product_photo_1 != blank %}
+          <img id="SbfProductMainImage" class="sbf-product-image" src="{{ product_photo_1 | image_url: width: 1800 }}" alt="Pasture-raised brown eggs from Spring Bottom Farm" loading="eager">
         {% elsif product.featured_image %}
           {{ product.featured_image | image_url: width: 1800 | image_tag: loading: 'eager', alt: product.title, class: 'sbf-product-image', id: 'SbfProductMainImage' }}
         {% endif %}
       </div>
 
-      <div class="sbf-product-thumbnails" aria-label="Egg product photos">
-        {% if egg_photo_1 != blank %}
-          <button type="button" class="sbf-product-thumb is-active" data-image="{{ egg_photo_1 | image_url: width: 1800 }}" data-alt="Pasture-raised brown eggs from Spring Bottom Farm" aria-label="View egg photo 1">
-            <img src="{{ egg_photo_1 | image_url: width: 500 }}" alt="Pasture-raised brown eggs" loading="eager">
-          </button>
-        {% endif %}
-        {% if egg_photo_2 != blank %}
-          <button type="button" class="sbf-product-thumb" data-image="{{ egg_photo_2 | image_url: width: 1800 }}" data-alt="Fresh brown egg from Spring Bottom Farm" aria-label="View egg photo 2">
-            <img src="{{ egg_photo_2 | image_url: width: 500 }}" alt="Fresh brown egg" loading="lazy">
-          </button>
-        {% endif %}
-        {% if egg_photo_3 != blank %}
-          <button type="button" class="sbf-product-thumb" data-image="{{ egg_photo_3 | image_url: width: 1800 }}" data-alt="Egg cartons packed at Spring Bottom Farm" aria-label="View egg photo 3">
-            <img src="{{ egg_photo_3 | image_url: width: 500 }}" alt="Egg cartons packed at the farm" loading="lazy">
-          </button>
-        {% endif %}
-        {% if egg_photo_4 != blank %}
-          <button type="button" class="sbf-product-thumb" data-image="{{ egg_photo_4 | image_url: width: 1800 }}" data-alt="Fresh egg cartons from Spring Bottom Farm" aria-label="View egg photo 4">
-            <img src="{{ egg_photo_4 | image_url: width: 500 }}" alt="Fresh egg cartons" loading="lazy">
-          </button>
-        {% endif %}
-      </div>
+      {% if is_egg_product %}
+        <div class="sbf-product-thumbnails" aria-label="Egg product photos">
+          {% if product_photo_1 != blank %}
+            <button type="button" class="sbf-product-thumb is-active" data-image="{{ product_photo_1 | image_url: width: 1800 }}" data-alt="Pasture-raised brown eggs from Spring Bottom Farm" aria-label="View egg photo 1">
+              <img src="{{ product_photo_1 | image_url: width: 500 }}" alt="Pasture-raised brown eggs" loading="eager">
+            </button>
+          {% endif %}
+          {% if product_photo_2 != blank %}
+            <button type="button" class="sbf-product-thumb" data-image="{{ product_photo_2 | image_url: width: 1800 }}" data-alt="Fresh brown egg from Spring Bottom Farm" aria-label="View egg photo 2">
+              <img src="{{ product_photo_2 | image_url: width: 500 }}" alt="Fresh brown egg" loading="lazy">
+            </button>
+          {% endif %}
+          {% if product_photo_3 != blank %}
+            <button type="button" class="sbf-product-thumb" data-image="{{ product_photo_3 | image_url: width: 1800 }}" data-alt="Egg cartons packed at Spring Bottom Farm" aria-label="View egg photo 3">
+              <img src="{{ product_photo_3 | image_url: width: 500 }}" alt="Egg cartons packed at the farm" loading="lazy">
+            </button>
+          {% endif %}
+          {% if product_photo_4 != blank %}
+            <button type="button" class="sbf-product-thumb" data-image="{{ product_photo_4 | image_url: width: 1800 }}" data-alt="Fresh egg cartons from Spring Bottom Farm" aria-label="View egg photo 4">
+              <img src="{{ product_photo_4 | image_url: width: 500 }}" alt="Fresh egg cartons" loading="lazy">
+            </button>
+          {% endif %}
+        </div>
+      {% endif %}
     </div>
 
     <div class="sbf-product-copy">
@@ -97,15 +106,18 @@
         </button>
       {% endform %}
 
-      <div class="sbf-product-highlights">
-        <div class="sbf-product-highlight"><strong>Pasture-Raised</strong><span>Hens spend their days outdoors with room to roam.</span></div>
-        <div class="sbf-product-highlight"><strong>Local Farm</strong><span>Raised, collected, and packed right here in Freeland, Maryland.</span></div>
-        <div class="sbf-product-highlight"><strong>Fresh &amp; Natural</strong><span>Fresh brown eggs collected and packed by hand.</span></div>
-      </div>
+      {% if is_egg_product %}
+        <div class="sbf-product-highlights">
+          <div class="sbf-product-highlight"><strong>Pasture-Raised</strong><span>Hens spend their days outdoors with room to roam.</span></div>
+          <div class="sbf-product-highlight"><strong>Local Farm</strong><span>Raised, collected, and packed right here in Freeland, Maryland.</span></div>
+          <div class="sbf-product-highlight"><strong>Fresh &amp; Natural</strong><span>Fresh brown eggs collected and packed by hand.</span></div>
+        </div>
+      {% endif %}
     </div>
   </div>
 </div>
 
+{% if is_egg_product %}
 <script>
   (function() {
     var mainImage = document.getElementById('SbfProductMainImage');
@@ -122,6 +134,7 @@
     });
   })();
 </script>
+{% endif %}
 
 <style>
   .sbf-product-page{background:#f7f4ed;color:#243126;padding:70px 24px 95px}
