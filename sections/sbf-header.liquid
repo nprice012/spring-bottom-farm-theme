@@ -7,40 +7,11 @@
       <a href="{{ routes.all_products_collection_url }}">Shop</a>
       <a href="/pages/egg-subscription">Egg Subscription</a>
       <a href="{{ routes.root_url }}#our-farm">Our Farm</a>
-      <button type="button" class="sbf-nav-link" id="sbf-farm-stand-link">Farm Stand</button>
+      <a href="{{ routes.root_url }}#farm-stand">Farm Stand</a>
       <a href="mailto:SpringBottomFarmMD@gmail.com">Contact</a>
       <a href="{{ routes.cart_url }}">Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</a>
     </nav>
   </div>
 </header>
-
-<script>
-  (function () {
-    function goToFarmStand() {
-      var target = document.getElementById('farm-stand');
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        return;
-      }
-      sessionStorage.setItem('sbf-scroll-to', 'farm-stand');
-      window.location.href = '{{ routes.root_url }}';
-    }
-
-    function checkPendingScroll() {
-      if (sessionStorage.getItem('sbf-scroll-to') !== 'farm-stand') return;
-      var target = document.getElementById('farm-stand');
-      if (!target) return;
-      sessionStorage.removeItem('sbf-scroll-to');
-      setTimeout(function () {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 150);
-    }
-
-    var link = document.getElementById('sbf-farm-stand-link');
-    if (link) link.addEventListener('click', goToFarmStand);
-    window.addEventListener('load', checkPendingScroll);
-    checkPendingScroll();
-  })();
-</script>
 
 {% schema %}{"name":"Spring Bottom Header","settings":[]} {% endschema %}
