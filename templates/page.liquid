@@ -132,6 +132,58 @@
       </div>
     </section>
   </div>
+{% elsif page.handle == 'our-farm' %}
+  <style>
+    .sbf-farm-page{background:#f7f4ed;color:#243126}
+    .sbf-farm-hero{padding:110px 24px 90px;background:#243b2f;color:#fff;text-align:center}
+    .sbf-farm-hero-inner,.sbf-farm-content{max-width:920px;margin:0 auto}
+    .sbf-farm-hero .eyebrow,.sbf-farm-content .eyebrow{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:20px}
+    .sbf-farm-hero h1{font-size:clamp(48px,7vw,82px);line-height:.98;letter-spacing:-.045em;margin:0 0 25px}
+    .sbf-farm-hero p{font-size:20px;line-height:1.6;max-width:720px;margin:0 auto}
+    .sbf-farm-content{padding:85px 24px 110px}
+    .sbf-farm-content section{margin-bottom:75px}
+    .sbf-farm-content h2{font-size:clamp(34px,5vw,52px);line-height:1.05;letter-spacing:-.03em;margin:0 0 20px}
+    .sbf-farm-content p{font-size:18px;line-height:1.75;margin:0 0 18px}
+    .sbf-farm-products{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:35px}
+    .sbf-farm-product{background:#fff;padding:28px}
+    .sbf-farm-product strong{display:block;font-size:18px;margin-bottom:8px}
+    .sbf-farm-product span{font-size:15px;line-height:1.55}
+    @media screen and (max-width:749px){.sbf-farm-hero{padding:75px 24px 65px}.sbf-farm-content{padding:65px 24px 80px}.sbf-farm-products{grid-template-columns:1fr}}
+  </style>
+  <div class="sbf-farm-page">
+    <section class="sbf-farm-hero">
+      <div class="sbf-farm-hero-inner">
+        <div class="eyebrow">Spring Bottom Farm</div>
+        <h1>Our Farm in Freeland, Maryland.</h1>
+        <p>A working family farm in Northern Baltimore County, raising quality food, caring for the land, and building a sustainable future.</p>
+      </div>
+    </section>
+    <div class="sbf-farm-content">
+      <section>
+        <div class="eyebrow">A Working Farm</div>
+        <h2>Rooted in Freeland.</h2>
+        <p>Spring Bottom Farm is a family-run farm in Freeland, Maryland. We raise food, care for livestock, work the land, and share what we produce with our neighbors throughout Northern Baltimore County and the surrounding area.</p>
+        <p>From our pasture-raised eggs and farm-raised beef to Thanksgiving turkeys, hay, firewood, and seasonal farm products, our goal is simple: produce good food and useful farm products while taking care of the land that makes it possible.</p>
+      </section>
+      <section>
+        <div class="eyebrow">What We Do</div>
+        <h2>More than a farm stand.</h2>
+        <p>Spring Bottom Farm is a working farm first. Our days are spent caring for animals, maintaining pasture, making hay, preparing products, and keeping the farm productive year-round.</p>
+        <div class="sbf-farm-products">
+          <div class="sbf-farm-product"><strong>Pasture-Raised Eggs</strong><span>Fresh brown eggs collected from our flock and sold directly to local customers.</span></div>
+          <div class="sbf-farm-product"><strong>Farm-Raised Beef</strong><span>Beef from cattle raised right here on our family farm.</span></div>
+          <div class="sbf-farm-product"><strong>Thanksgiving Turkeys</strong><span>Pasture-raised, GMO-free turkeys available for farm pickup.</span></div>
+          <div class="sbf-farm-product"><strong>Hay & Farm Products</strong><span>Hay, firewood, seasonal produce, and other products from our farm and local agricultural work.</span></div>
+        </div>
+      </section>
+      <section>
+        <div class="eyebrow">Our Approach</div>
+        <h2>Good food starts with good stewardship.</h2>
+        <p>We believe a farm should be productive without losing sight of the land, the animals, or the people who depend on it. We focus on practical, responsible farming and on building a farm that can continue to serve our family and our community for years to come.</p>
+        <p>We're proud to farm in Freeland and to be part of the local agricultural community in Northern Baltimore County.</p>
+      </section>
+    </div>
+  </div>
 {% else %}
   <div class="sbf-page">
     <div class="sbf-wrap">
