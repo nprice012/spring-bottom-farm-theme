@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -13,11 +22,7 @@
     },
     "intro": {
       "type": "sbf-intro",
-      "settings": {
-        "eyebrow": "FROM OUR FARM",
-        "heading": "Raised with care. Grown close to home.",
-        "text": "We're a family farm producing fresh food for our local community, one season at a time."
-      }
+      "settings": {}
     },
     "shop": {
       "type": "sbf-shop",
@@ -68,7 +73,13 @@
           }
         }
       },
-      "block_order": ["category_BDCUNY", "eggs", "produce", "favorites", "bakery"],
+      "block_order": [
+        "category_BDCUNY",
+        "eggs",
+        "produce",
+        "favorites",
+        "bakery"
+      ],
       "settings": {
         "heading": "Shop the Farm"
       }
@@ -87,7 +98,7 @@
     "story": {
       "type": "sbf-story",
       "settings": {
-        "image": "shopify://shop_images/79DE1D55-B13C-40BD-BE7A-95ECBA078F3A.jpg",
+        "image": "shopify://shop_images/IMG_7245.jpg",
         "eyebrow": "OUR FARM",
         "heading": "Our family farm in Northern Baltimore County.",
         "text": "Spring Bottom Farm is our family farm in Freeland, Maryland. We raise cattle and chickens, grow seasonal produce, and make fresh farm goods for our neighbors and local community.",
@@ -115,5 +126,13 @@
       }
     }
   },
-  "order": ["hero", "intro", "shop", "eggclub", "story", "stand", "cta"]
+  "order": [
+    "hero",
+    "intro",
+    "shop",
+    "eggclub",
+    "story",
+    "stand",
+    "cta"
+  ]
 }
