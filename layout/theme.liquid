@@ -4,20 +4,27 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   {% assign seo_title = page_title | default: shop.name %}
+  {% assign seo_description = page_description | strip_html %}
   {% if template.name == 'index' %}
     {% assign seo_title = 'Spring Bottom Farm | Farm Fresh Food in Freeland, MD' %}
+    {% assign seo_description = 'Spring Bottom Farm is a family farm in Freeland, Maryland offering pasture-raised eggs, farm-raised beef, Thanksgiving turkeys, hay, firewood and seasonal farm products.' %}
   {% elsif template.name == 'product' and product %}
     {% assign seo_title = product.title | append: ' | Spring Bottom Farm' %}
   {% endif %}
-  <title>{{ seo_title | escape }}</title>
-  {% if template.name == 'index' %}
-    <meta name="description" content="Spring Bottom Farm is a family farm in Freeland, Maryland offering pasture-raised eggs, farm-raised beef, Thanksgiving turkeys, hay, firewood and seasonal farm products.">
-  {% elsif page_description != blank %}
-    <meta name="description" content="{{ page_description | strip_html | escape }}">
-  {% else %}
-    <meta name="description" content="Shop fresh, locally raised food and farm products from Spring Bottom Farm in Freeland, Maryland.">
+  {% if seo_description == blank %}
+    {% assign seo_description = 'Shop fresh, locally raised food and farm products from Spring Bottom Farm in Freeland, Maryland.' %}
   {% endif %}
+  <title>{{ seo_title | escape }}</title>
+  <meta name="description" content="{{ seo_description | escape }}">
   <meta name="robots" content="index,follow">
+  <meta property="og:title" content="{{ seo_title | escape }}">
+  <meta property="og:description" content="{{ seo_description | escape }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:type" content="{% if template.name == 'product' %}product{% else %}website{% endif %}">
+  <meta property="og:site_name" content="Spring Bottom Farm">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ seo_title | escape }}">
+  <meta name="twitter:description" content="{{ seo_description | escape }}">
   {{ content_for_header }}
   {{ 'sbf.css' | asset_url | stylesheet_tag }}
 </head>
