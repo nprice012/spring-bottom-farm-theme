@@ -3,7 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>{% if page_title %}{{ page_title }}{% else %}{{ shop.name }}{% endif %}</title>
+  {% assign seo_title = page_title | default: shop.name %}
+  {% if template.name == 'index' %}
+    {% assign seo_title = 'Spring Bottom Farm | Farm Fresh Food in Freeland, MD' %}
+  {% elsif template.name == 'product' and product %}
+    {% assign seo_title = product.title | append: ' | Spring Bottom Farm' %}
+  {% endif %}
+  <title>{{ seo_title | escape }}</title>
+  {% if template.name == 'index' %}
+    <meta name="description" content="Spring Bottom Farm is a family farm in Freeland, Maryland offering pasture-raised eggs, farm-raised beef, Thanksgiving turkeys, hay, firewood and seasonal farm products.">
+  {% elsif page_description != blank %}
+    <meta name="description" content="{{ page_description | strip_html | escape }}">
+  {% else %}
+    <meta name="description" content="Shop fresh, locally raised food and farm products from Spring Bottom Farm in Freeland, Maryland.">
+  {% endif %}
+  <meta name="robots" content="index,follow">
   {{ content_for_header }}
   {{ 'sbf.css' | asset_url | stylesheet_tag }}
 </head>
