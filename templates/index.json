@@ -100,9 +100,9 @@
       "settings": {
         "image": "shopify://shop_images/IMG_7245.jpg",
         "eyebrow": "OUR FARM",
-        "heading": "Our family farm in Northern Baltimore County.",
-        "text": "Spring Bottom Farm is our family farm in Freeland, Maryland. We raise cattle and chickens, grow seasonal produce, and make fresh farm goods for our neighbors and local community.",
-        "button_label": "Our Farm",
+        "heading": "Rooted in Real Life.",
+        "text": "Spring Bottom Farm is a family-run farm in Freeland, Maryland, focused on raising quality food, caring for the land, and building a sustainable future. From pasture-raised eggs and seasonal produce to hay and livestock, everything we do is rooted in hard work and a love for the land. We’re proud to be part of this community and share the fruits of our farm with our neighbors.",
+        "button_label": "Our Story",
         "button_link": "/pages/our-farm"
       }
     },
