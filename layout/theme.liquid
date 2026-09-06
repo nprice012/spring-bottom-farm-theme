@@ -12,6 +12,55 @@
   <main id="MainContent">{{ content_for_layout }}</main>
   {% section 'sbf-footer' %}
 
+  {% assign turkey_popup_product = blank %}
+  {% for popup_product in collections.all.products %}
+    {% if popup_product.title == '2026 Thanksgiving Turkey Deposit' %}
+      {% assign turkey_popup_product = popup_product %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
+  {% if turkey_popup_product != blank %}
+    <div id="SbfTurkeyPopup" class="sbf-turkey-popup" aria-hidden="true">
+      <div class="sbf-turkey-popup-backdrop" data-turkey-popup-close></div>
+      <div class="sbf-turkey-popup-card" role="dialog" aria-modal="true" aria-labelledby="SbfTurkeyPopupTitle">
+        <button type="button" class="sbf-turkey-popup-close" aria-label="Close" data-turkey-popup-close>&times;</button>
+        {% if turkey_popup_product.featured_image %}
+          <div class="sbf-turkey-popup-image">
+            <img src="{{ turkey_popup_product.featured_image | image_url: width: 1200 }}" alt="Pasture-raised Thanksgiving turkeys from Spring Bottom Farm">
+          </div>
+        {% endif %}
+        <div class="sbf-turkey-popup-content">
+          <div class="sbf-turkey-popup-eyebrow">SPRING BOTTOM FARM</div>
+          <h2 id="SbfTurkeyPopupTitle">THANKSGIVING TURKEYS ARE NOW OPEN</h2>
+          <p class="sbf-turkey-popup-subtitle">Pasture-Raised &bull; GMO-Free &bull; $5.99/lb</p>
+          <div class="sbf-turkey-popup-deposit">$30 NON-REFUNDABLE DEPOSIT</div>
+          <p>Reserve your Thanksgiving turkey now. Your deposit is applied toward the final purchase price, with the remaining balance due at pickup at Spring Bottom Farm.</p>
+          <a class="sbf-turkey-popup-button" href="{{ turkey_popup_product.url }}">RESERVE YOUR TURKEY</a>
+          <p class="sbf-turkey-popup-note">Farm pickup in Freeland, Maryland. Pickup details will be emailed when turkeys are ready.</p>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .sbf-turkey-popup{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:22px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease,visibility .25s ease}.sbf-turkey-popup.is-open{opacity:1;visibility:visible;pointer-events:auto}.sbf-turkey-popup-backdrop{position:absolute;inset:0;background:rgba(20,27,22,.72)}.sbf-turkey-popup-card{position:relative;z-index:1;width:min(880px,100%);max-height:calc(100vh - 44px);overflow:auto;background:#f7f4ed;color:#243126;box-shadow:0 24px 70px rgba(0,0,0,.3);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr)}.sbf-turkey-popup-image{min-height:100%;background:#eee9dc}.sbf-turkey-popup-image img{display:block;width:100%;height:100%;min-height:430px;object-fit:cover}.sbf-turkey-popup-content{padding:48px 42px 42px;display:flex;flex-direction:column;justify-content:center}.sbf-turkey-popup-eyebrow{font-size:12px;font-weight:800;letter-spacing:.16em;margin-bottom:13px}.sbf-turkey-popup-content h2{font-size:clamp(32px,4vw,48px);line-height:.98;letter-spacing:-.035em;margin:0 0 15px}.sbf-turkey-popup-subtitle{font-size:15px;font-weight:800;letter-spacing:.1em;margin:0 0 22px}.sbf-turkey-popup-deposit{background:#243126;color:#fff;padding:17px 18px;font-size:20px;font-weight:900;letter-spacing:.06em;text-align:center;margin-bottom:20px}.sbf-turkey-popup-content p:not(.sbf-turkey-popup-subtitle):not(.sbf-turkey-popup-note){font-size:16px;line-height:1.55;margin:0 0 22px}.sbf-turkey-popup-button{display:flex;align-items:center;justify-content:center;min-height:58px;background:#243126;color:#fff;text-decoration:none;font-size:15px;font-weight:900;letter-spacing:.09em;text-align:center;padding:15px 20px}.sbf-turkey-popup-button:hover{background:#18231b}.sbf-turkey-popup-note{font-size:12px!important;line-height:1.45!important;margin:14px 0 0!important;color:#5b625b}.sbf-turkey-popup-close{position:absolute;z-index:2;top:12px;right:12px;width:40px;height:40px;border:0;border-radius:50%;background:rgba(255,255,255,.94);color:#243126;font-size:28px;line-height:1;cursor:pointer}.sbf-turkey-popup-close:hover{background:#fff}.sbf-turkey-popup.is-open .sbf-turkey-popup-card{animation:sbfTurkeyPopupIn .25s ease both}@keyframes sbfTurkeyPopupIn{from{transform:translateY(12px);opacity:0}to{transform:translateY(0);opacity:1}}@media screen and (max-width:749px){.sbf-turkey-popup{padding:12px}.sbf-turkey-popup-card{display:block;max-height:calc(100vh - 24px)}.sbf-turkey-popup-image img{height:auto;min-height:0;max-height:42vh;object-fit:cover}.sbf-turkey-popup-content{padding:28px 24px 25px}.sbf-turkey-popup-content h2{font-size:34px}.sbf-turkey-popup-deposit{font-size:17px}.sbf-turkey-popup-button{min-height:60px}}
+    </style>
+
+    <script>
+      (function(){
+        var popup=document.getElementById('SbfTurkeyPopup');
+        if(!popup)return;
+        var storageKey='sbfTurkeyPopupSeen2026';
+        function closePopup(){popup.classList.remove('is-open');popup.setAttribute('aria-hidden','true');document.documentElement.style.overflow='';}
+        function openPopup(){popup.classList.add('is-open');popup.setAttribute('aria-hidden','false');document.documentElement.style.overflow='hidden';try{sessionStorage.setItem(storageKey,'1')}catch(e){}}
+        popup.querySelectorAll('[data-turkey-popup-close]').forEach(function(el){el.addEventListener('click',closePopup)});
+        document.addEventListener('keydown',function(e){if(e.key==='Escape'&&popup.classList.contains('is-open'))closePopup()});
+        var seen=false;try{seen=sessionStorage.getItem(storageKey)==='1'}catch(e){}
+        if(!seen){setTimeout(openPopup,1200)}
+      })();
+    </script>
+  {% endif %}
+
   <script>
     (function () {
       function scrollToHash() {
