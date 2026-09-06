@@ -14,18 +14,12 @@
           {% for item in cart.items %}
             <div class="sbf-cart-item">
               <div class="sbf-cart-item-image">
-                {% if item.image %}
-                  {{ item.image | image_url: width: 500 | image_tag: loading: 'lazy', alt: item.product.title }}
-                {% endif %}
+                {% if item.image %}{{ item.image | image_url: width: 500 | image_tag: loading: 'lazy', alt: item.product.title }}{% endif %}
               </div>
               <div class="sbf-cart-item-copy">
                 <h2><a href="{{ item.url }}">{{ item.product.title }}</a></h2>
-                {% unless item.product.has_only_default_variant %}
-                  <p>{{ item.variant.title }}</p>
-                {% endunless %}
-                {% if item.selling_plan_allocation %}
-                  <p class="sbf-cart-plan">{{ item.selling_plan_allocation.selling_plan.name }}</p>
-                {% endif %}
+                {% unless item.product.has_only_default_variant %}<p>{{ item.variant.title }}</p>{% endunless %}
+                {% if item.selling_plan_allocation %}<p class="sbf-cart-plan">{{ item.selling_plan_allocation.selling_plan.name }}</p>{% endif %}
                 <div class="sbf-cart-item-price">{{ item.final_price | money }}</div>
                 <label for="CartQuantity-{{ forloop.index }}">Quantity</label>
                 <input id="CartQuantity-{{ forloop.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity for {{ item.product.title }}">
@@ -36,10 +30,7 @@
         </div>
 
         <div class="sbf-cart-summary">
-          <div class="sbf-cart-total-row">
-            <span>Subtotal</span>
-            <strong>{{ cart.total_price | money }}</strong>
-          </div>
+          <div class="sbf-cart-total-row"><span>Subtotal</span><strong>{{ cart.total_price | money }}</strong></div>
           <p class="sbf-cart-note">Delivery and pickup options are shown at checkout.</p>
           <button type="submit" name="update" class="sbf-button sbf-cart-update">UPDATE CART</button>
           <button type="submit" name="checkout" class="sbf-button sbf-cart-checkout">CHECKOUT</button>
@@ -54,27 +45,13 @@
   .sbf-cart-page h1{font-size:clamp(42px,6vw,72px);line-height:.98;letter-spacing:-.04em;margin:0 0 40px}
   .sbf-cart-form{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:55px;align-items:start}
   .sbf-cart-item{display:grid;grid-template-columns:180px minmax(0,1fr);gap:24px;padding:24px 0;border-top:1px solid #c9c3b6}
-  .sbf-cart-item-image{aspect-ratio:1/1;background:#eee9dc;overflow:hidden}
-  .sbf-cart-item-image img{width:100%;height:100%;object-fit:cover;display:block}
-  .sbf-cart-item-copy h2{font-size:24px;margin:0 0 8px}
-  .sbf-cart-item-copy h2 a{color:inherit;text-decoration:none}
-  .sbf-cart-item-copy p{margin:5px 0;font-size:14px}
-  .sbf-cart-plan{font-weight:700}
-  .sbf-cart-item-price{font-weight:700;font-size:18px;margin:15px 0}
-  .sbf-cart-item-copy label{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
-  .sbf-cart-item-copy input{width:90px;padding:11px;border:1px solid #aaa69b;background:#fff;font:inherit}
-  .sbf-cart-remove{display:inline-block;margin-left:12px;color:#243126;font-size:13px}
-  .sbf-cart-summary{border:1px solid #c9c3b6;padding:25px;background:#eee9dc;position:sticky;top:25px}
-  .sbf-cart-total-row{display:flex;justify-content:space-between;gap:20px;font-size:20px;margin-bottom:12px}
-  .sbf-cart-note{font-size:13px;line-height:1.5;margin:0 0 22px}
-  .sbf-cart-summary .sbf-button{width:100%;margin-top:10px}
-  .sbf-cart-update{background:transparent!important;color:#243126!important;border:1px solid #243126!important}
-  .sbf-cart-empty{padding:30px 0}
-  .sbf-cart-empty p{font-size:18px;margin:0 0 25px}
-  @media screen and (max-width:749px){
-    .sbf-cart-page{padding:45px 20px 65px}
-    .sbf-cart-form{grid-template-columns:1fr;gap:30px}
-    .sbf-cart-item{grid-template-columns:110px minmax(0,1fr);gap:15px}
-    .sbf-cart-summary{position:static}
-  }
+  .sbf-cart-item-image{aspect-ratio:1/1;background:#eee9dc;overflow:hidden}.sbf-cart-item-image img{width:100%;height:100%;object-fit:cover;display:block}
+  .sbf-cart-item-copy h2{font-size:24px;margin:0 0 8px}.sbf-cart-item-copy h2 a{color:inherit;text-decoration:none}.sbf-cart-item-copy p{margin:5px 0;font-size:14px}.sbf-cart-plan{font-weight:700}.sbf-cart-item-price{font-weight:700;font-size:18px;margin:15px 0}
+  .sbf-cart-item-copy label{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}.sbf-cart-item-copy input{width:90px;padding:11px;border:1px solid #aaa69b;background:#fff;font:inherit}.sbf-cart-remove{display:inline-block;margin-left:12px;color:#243126;font-size:13px}
+  .sbf-cart-summary{border:1px solid #c9c3b6;padding:28px;background:#eee9dc;position:sticky;top:25px}.sbf-cart-total-row{display:flex;justify-content:space-between;gap:20px;font-size:20px;margin-bottom:12px}.sbf-cart-note{font-size:13px;line-height:1.5;margin:0 0 22px}
+  .sbf-cart-summary .sbf-button{display:flex;align-items:center;justify-content:center;width:100%;min-height:58px;padding:16px 22px;margin-top:12px;box-sizing:border-box;font-size:15px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;line-height:1.1;text-decoration:none;cursor:pointer}
+  .sbf-cart-update{background:transparent!important;color:#243126!important;border:2px solid #243126!important}.sbf-cart-update:hover{background:#243126!important;color:#fff!important}
+  .sbf-cart-checkout{background:#243126!important;color:#fff!important;border:2px solid #243126!important}.sbf-cart-checkout:hover{background:#18231b!important;border-color:#18231b!important}
+  .sbf-cart-empty{padding:30px 0}.sbf-cart-empty p{font-size:18px;margin:0 0 25px}
+  @media screen and (max-width:749px){.sbf-cart-page{padding:45px 20px 65px}.sbf-cart-form{grid-template-columns:1fr;gap:30px}.sbf-cart-item{grid-template-columns:110px minmax(0,1fr);gap:15px}.sbf-cart-summary{position:static}.sbf-cart-summary .sbf-button{min-height:60px}}
 </style>
