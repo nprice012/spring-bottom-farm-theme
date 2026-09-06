@@ -64,18 +64,29 @@
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
         {% endunless %}
 
-        {% if product.selling_plan_groups.size > 0 %}
-          <div class="sbf-selling-plans">
-            <label for="SellingPlan-{{ section.id | default: 'product' }}">Subscription</label>
-            <select name="selling_plan" id="SellingPlan-{{ section.id | default: 'product' }}">
-              <option value="">One-time purchase</option>
-              {% for group in product.selling_plan_groups %}
-                {% for plan in group.selling_plans %}
-                  <option value="{{ plan.id }}">{{ plan.name }}</option>
-                {% endfor %}
-              {% endfor %}
-            </select>
-          </div>
+        {% assign current_variant = product.selected_or_first_available_variant %}
+        {% if current_variant.selling_plan_allocations.size > 0 %}
+          <fieldset class="sbf-purchase-options">
+            <legend>Choose how you want your eggs</legend>
+
+            <label class="sbf-purchase-option">
+              <input type="radio" name="selling_plan" value="" checked>
+              <span>
+                <strong>One-time purchase</strong>
+                <small>{{ current_variant.price | money }} today</small>
+              </span>
+            </label>
+
+            {% for allocation in current_variant.selling_plan_allocations %}
+              <label class="sbf-purchase-option">
+                <input type="radio" name="selling_plan" value="{{ allocation.selling_plan.id }}">
+                <span>
+                  <strong>{{ allocation.selling_plan.name }}</strong>
+                  <small>{{ allocation.price | money }} per delivery</small>
+                </span>
+              </label>
+            {% endfor %}
+          </fieldset>
         {% endif %}
 
         <label for="Quantity-{{ section.id | default: 'product' }}">Quantity</label>
@@ -129,6 +140,14 @@
   .sbf-product-form{display:flex;flex-direction:column;gap:10px;max-width:560px;border-top:1px solid #c9c3b6;padding-top:18px}
   .sbf-product-form label{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:10px}
   .sbf-product-form select,.sbf-product-form input[type=number]{width:100%;padding:15px;border:1px solid #aaa69b;background:#fff;color:#243126;font:inherit}
+  .sbf-purchase-options{border:0;padding:0;margin:10px 0 6px}
+  .sbf-purchase-options legend{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+  .sbf-purchase-option{display:flex;align-items:flex-start;gap:12px;width:100%;padding:15px 16px;border:1px solid #aaa69b;background:#fff;cursor:pointer;margin:0 0 8px;text-transform:none!important;letter-spacing:normal!important;font-size:15px!important;font-weight:400!important}
+  .sbf-purchase-option:has(input:checked){border-color:#243126;box-shadow:inset 0 0 0 1px #243126}
+  .sbf-purchase-option input{margin:3px 0 0;accent-color:#243126}
+  .sbf-purchase-option span{display:flex;flex-direction:column;gap:4px}
+  .sbf-purchase-option strong{font-size:16px}
+  .sbf-purchase-option small{font-size:13px;color:#5b625b}
   .sbf-product-form button{width:100%;border:0;cursor:pointer;margin-top:18px}
   .sbf-product-form button:disabled{opacity:.5;cursor:not-allowed}
   .sbf-product-highlights{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:42px;padding-top:30px;border-top:1px solid #c9c3b6}
