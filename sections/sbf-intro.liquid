@@ -1,4 +1,10 @@
 {% assign egg_subscription_url = '/pages/egg-subscription' %}
+{% for shop_product in collections.all.products %}
+  {% if shop_product.title == 'Pasture-Raised Eggs' %}
+    {% assign egg_subscription_url = shop_product.url %}
+    {% break %}
+  {% endif %}
+{% endfor %}
 
 <style>
   .sbf-intro {
@@ -72,7 +78,7 @@
     </p>
 
     <a class="sbf-intro-button" href="{{ egg_subscription_url }}">
-      Start Your Egg Subscription
+      ORDER FRESH EGGS
     </a>
   </div>
 </section>
