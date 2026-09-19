@@ -3,7 +3,16 @@
     <div class="sbf-heading-row"><h2>{{ section.settings.heading }}</h2><a href="{{ routes.collections_url }}">Shop all</a></div>
     <div class="sbf-card-grid">
       {% for block in section.blocks %}
-        <a class="sbf-card" href="{{ block.settings.link | default: routes.collections_url }}" {{ block.shopify_attributes }}>
+        {% assign card_link = block.settings.link | default: routes.collections_url %}
+        {% if block.settings.title == 'Farm Fresh Eggs' %}
+          {% for shop_product in collections.all.products %}
+            {% if shop_product.title == 'Pasture-Raised Eggs' %}
+              {% assign card_link = shop_product.url %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+        <a class="sbf-card" href="{{ card_link }}" {{ block.shopify_attributes }}>
           {% if block.settings.image %}{{ block.settings.image | image_url: width: 1000 | image_tag: loading:'lazy' }}{% else %}<div class="sbf-placeholder"></div>{% endif %}
           <div class="sbf-card-shade"></div>
           <div class="sbf-card-copy"><h3>{{ block.settings.title }}</h3><p>{{ block.settings.description }}</p></div>
