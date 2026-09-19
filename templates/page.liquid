@@ -15,6 +15,10 @@
 
   {% if egg_product != blank %}
     {% assign egg_subscription_url = egg_product.url %}
+    <script>
+      window.location.replace({{ egg_product.url | json }} + window.location.search);
+    </script>
+    <noscript><meta http-equiv="refresh" content="0;url={{ egg_product.url }}"></noscript>
   {% else %}
     {% assign egg_subscription_url = routes.all_products_collection_url %}
   {% endif %}
