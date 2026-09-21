@@ -28,6 +28,14 @@
           {% if product_photo_3 != blank %}<button type="button" class="sbf-product-thumb" data-image="{{ product_photo_3 | image_url: width: 1800 }}" data-alt="Egg cartons packed at Spring Bottom Farm" aria-label="View egg photo 3"><img src="{{ product_photo_3 | image_url: width: 500 }}" alt="Egg cartons packed at the farm" loading="lazy"></button>{% endif %}
           {% if product_photo_4 != blank %}<button type="button" class="sbf-product-thumb" data-image="{{ product_photo_4 | image_url: width: 1800 }}" data-alt="Fresh egg cartons from Spring Bottom Farm" aria-label="View egg photo 4"><img src="{{ product_photo_4 | image_url: width: 500 }}" alt="Fresh egg cartons" loading="lazy"></button>{% endif %}
         </div>
+      {% elsif product.images.size > 1 %}
+        <div class="sbf-product-thumbnails" aria-label="{{ product.title }} product photos">
+          {% for image in product.images %}
+            <button type="button" class="sbf-product-thumb{% if forloop.first %} is-active{% endif %}" data-image="{{ image | image_url: width: 1800 }}" data-alt="{{ image.alt | default: product.title | escape }}" aria-label="View product photo {{ forloop.index }}">
+              <img src="{{ image | image_url: width: 500 }}" alt="{{ image.alt | default: product.title | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+            </button>
+          {% endfor %}
+        </div>
       {% endif %}
     </div>
 
@@ -72,9 +80,9 @@
   </div>
 </div>
 
-{% if is_egg_product %}
+{% if is_egg_product or product.images.size > 1 %}
 <script>
-(function(){var mainImage=document.getElementById('SbfProductMainImage');var thumbnails=document.querySelectorAll('.sbf-product-thumb');if(!mainImage||!thumbnails.length)return;thumbnails.forEach(function(button){button.addEventListener('click',function(){mainImage.src=button.getAttribute('data-image');mainImage.alt=button.getAttribute('data-alt')||'Pasture-raised brown eggs from Spring Bottom Farm';thumbnails.forEach(function(item){item.classList.remove('is-active')});button.classList.add('is-active')})})})();
+(function(){var mainImage=document.getElementById('SbfProductMainImage');var thumbnails=document.querySelectorAll('.sbf-product-thumb');if(!mainImage||!thumbnails.length)return;thumbnails.forEach(function(button){button.addEventListener('click',function(){mainImage.src=button.getAttribute('data-image');mainImage.alt=button.getAttribute('data-alt')||'{{ product.title | escape }}';thumbnails.forEach(function(item){item.classList.remove('is-active')});button.classList.add('is-active')})})})();
 </script>
 {% endif %}
 
