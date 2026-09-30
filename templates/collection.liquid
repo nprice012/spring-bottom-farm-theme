@@ -11,16 +11,20 @@
           {% for featured_handle in featured_handles %}
             {% assign featured_product = all_products[featured_handle] %}
             {% if featured_product != blank %}
-              <a class="sbf-product-card sbf-featured-card" href="{{ featured_product.url }}">
-                {% if featured_product.featured_image %}
-                  {{ featured_product.featured_image | image_url: width:1000 | image_tag: loading:'eager', widths:'500,700,900,1000', sizes:'(min-width: 750px) 50vw, 90vw', alt:featured_product.title }}
-                {% endif %}
+              <a class="sbf-product-card sbf-featured-card {% if forloop.index == 2 %}sbf-chicken-card{% endif %}" href="{{ featured_product.url }}">
+                <div class="sbf-featured-image-wrap">
+                  {% if featured_product.featured_image %}
+                    {{ featured_product.featured_image | image_url: width:1200 | image_tag: loading:'eager', widths:'600,800,1000,1200', sizes:'(min-width: 750px) 60vw, 95vw', alt:featured_product.title }}
+                  {% endif %}
+                  {% if forloop.index == 2 %}<span class="sbf-new-badge">NEW</span>{% endif %}
+                </div>
                 <div class="sbf-card-copy">
                   <div class="sbf-card-label">
-                    {% if forloop.index == 1 %}Fresh from our hens{% else %}Fresh from the farm{% endif %}
+                    {% if forloop.index == 1 %}Fresh from our hens{% else %}Fresh chicken{% endif %}
                   </div>
                   <h2>{{ featured_product.title }}</h2>
                   <div>{{ featured_product.price | money }}</div>
+                  {% if forloop.index == 2 %}<p class="sbf-featured-note">Premium boneless, skinless chicken breasts — now available from Spring Bottom Farm.</p>{% endif %}
                 </div>
               </a>
             {% endif %}
@@ -57,13 +61,22 @@
   .sbf-wrap{max-width:1100px;margin:0 auto}
   .sbf-collection-page h1{font-size:clamp(44px,6vw,72px);line-height:1;margin:0 0 25px;letter-spacing:-.04em}
   .sbf-collection-description{font-size:18px;line-height:1.6;max-width:700px;margin-bottom:45px}
-  .sbf-featured-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin:10px 0 75px}
+
+  /* The first two products are the storefront feature: eggs first, chicken larger. */
+  .sbf-featured-grid{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:30px;margin:10px 0 80px;align-items:start}
   .sbf-featured-card{max-width:none}
-  .sbf-featured-card img{width:100%;max-width:none;height:auto;aspect-ratio:1/1;object-fit:cover;margin-bottom:20px}
+  .sbf-featured-image-wrap{position:relative;width:100%;overflow:hidden;background:#ebe6da;margin-bottom:20px}
+  .sbf-featured-card:not(.sbf-chicken-card) .sbf-featured-image-wrap{aspect-ratio:1/1}
+  .sbf-chicken-card .sbf-featured-image-wrap{aspect-ratio:1.15/1}
+  .sbf-featured-card img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+  .sbf-featured-card:hover img{transform:scale(1.02)}
+  .sbf-new-badge{position:absolute;top:18px;left:18px;padding:8px 12px;background:#243126;color:#fff;font-size:12px;font-weight:800;letter-spacing:.12em}
   .sbf-card-copy{padding:0 4px}
-  .sbf-card-label{font-size:12px;text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-bottom:8px;opacity:.7}
-  .sbf-featured-card h2{font-size:clamp(26px,3vw,38px);line-height:1.05;margin:0 0 10px}
-  .sbf-featured-card .sbf-card-copy>div:last-child{font-size:19px;font-weight:700}
+  .sbf-card-label{font-size:12px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;margin-bottom:8px;opacity:.7}
+  .sbf-featured-card h2{font-size:clamp(26px,3vw,42px);line-height:1.05;margin:0 0 10px;letter-spacing:-.025em}
+  .sbf-featured-card .sbf-card-copy>div:last-of-type{font-size:19px;font-weight:700}
+  .sbf-featured-note{font-size:16px;line-height:1.5;max-width:600px;margin:14px 0 0;opacity:.78}
+
   .sbf-shop-heading{margin:0 0 30px}
   .sbf-shop-heading h2{font-size:clamp(30px,4vw,46px);line-height:1;margin:0;letter-spacing:-.03em}
   .sbf-product-grid-list{display:grid;grid-template-columns:repeat(3,minmax(0,320px));gap:42px;align-items:start}
@@ -71,6 +84,16 @@
   .sbf-product-card img{display:block;width:100%;max-width:320px;height:320px;aspect-ratio:1/1;object-fit:cover;margin-bottom:18px}
   .sbf-product-card h2{font-size:22px;line-height:1.15;margin:0 0 8px}
   .sbf-product-card div{font-size:17px;font-weight:700}
-  @media screen and (max-width:999px){.sbf-product-grid-list{grid-template-columns:repeat(2,minmax(0,320px))}}
-  @media screen and (max-width:749px){.sbf-collection-page{padding:50px 20px}.sbf-featured-grid{grid-template-columns:1fr;gap:45px;margin-bottom:60px}.sbf-product-grid-list{grid-template-columns:1fr;justify-items:start}.sbf-product-card,.sbf-product-card img{max-width:320px}.sbf-product-card img{height:320px}}
+
+  @media screen and (max-width:999px){
+    .sbf-product-grid-list{grid-template-columns:repeat(2,minmax(0,320px))}
+  }
+  @media screen and (max-width:749px){
+    .sbf-collection-page{padding:50px 20px}
+    .sbf-featured-grid{grid-template-columns:1fr;gap:45px;margin-bottom:60px}
+    .sbf-chicken-card .sbf-featured-image-wrap{aspect-ratio:1/1}
+    .sbf-product-grid-list{grid-template-columns:1fr;justify-items:start}
+    .sbf-product-card,.sbf-product-card img{max-width:320px}
+    .sbf-product-card img{height:320px}
+  }
 </style>
