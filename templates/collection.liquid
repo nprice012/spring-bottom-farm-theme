@@ -16,7 +16,9 @@
                   {{ featured_product.featured_image | image_url: width:1000 | image_tag: loading:'eager', widths:'500,700,900,1000', sizes:'(min-width: 750px) 50vw, 90vw', alt:featured_product.title }}
                 {% endif %}
                 <div class="sbf-card-copy">
-                  <div class="sbf-card-label">{{ forloop.index == 1 | ternary: 'Fresh from our hens', 'Fresh from the farm' }}</div>
+                  <div class="sbf-card-label">
+                    {% if forloop.index == 1 %}Fresh from our hens{% else %}Fresh from the farm{% endif %}
+                  </div>
                   <h2>{{ featured_product.title }}</h2>
                   <div>{{ featured_product.price | money }}</div>
                 </div>
