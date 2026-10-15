@@ -5,19 +5,41 @@
     {% if collection.description != blank %}<div class="sbf-collection-description">{{ collection.description }}</div>{% endif %}
 
     {% if collection.handle == 'all' %}
-      <section class="sbf-egg-subscription-callout" aria-label="Egg subscription">
-        <div class="sbf-egg-callout-copy">
-          <div class="sbf-callout-eyebrow">A fridge staple, taken care of</div>
-          <h2>Make farm-fresh eggs part of your routine.</h2>
-          <p>Choose an Egg Subscription for regular deliveries, with the flexibility to skip a week when you need to.</p>
+      <section class="sbf-shop-categories" aria-label="Shop by category">
+        <a class="sbf-category-feature" href="/products/farm-fresh-eggs-1-dozen">
+          <img src="https://cdn.shopify.com/s/files/1/0773/6564/1406/collections/ChatGPT_Image_Aug_22_2026_10_10_48_PM.png?v=1792028368" alt="Pasture-raised eggs from Spring Bottom Farm" loading="eager">
+          <span class="sbf-category-feature-copy">
+            <span class="sbf-category-eyebrow">A fridge staple, taken care of</span>
+            <strong>Eggs &amp; Egg Subscription</strong>
+            <span>Fresh farm eggs, delivered on your schedule.</span>
+            <span class="sbf-category-link-label">Shop eggs <span aria-hidden="true">→</span></span>
+          </span>
+        </a>
+        <div class="sbf-category-grid">
+          <a class="sbf-category-card" href="/collections/meat-freezer">
+            <img src="https://cdn.shopify.com/s/files/1/0773/6564/1406/collections/fresh-chicken-breast.png?v=1792028373" alt="Pasture-raised chicken from Spring Bottom Farm" loading="lazy">
+            <span class="sbf-category-card-copy"><strong>Meat &amp; Freezer</strong><span>Chicken, beef shares and seasonal turkey</span><span class="sbf-category-link-label">Shop meat →</span></span>
+          </a>
+          <a class="sbf-category-card" href="/collections/flourish-ferment-co">
+            <img src="https://cdn.shopify.com/s/files/1/0773/6564/1406/collections/flourish_ferment.webp?v=1792027560" alt="Flourish and Ferment artisan bakery products" loading="lazy">
+            <span class="sbf-category-card-copy"><strong>Bread &amp; Bakery</strong><span>Flourish &amp; Ferment favorites</span><span class="sbf-category-link-label">Shop bakery →</span></span>
+          </a>
+          <a class="sbf-category-card" href="/collections/pantry-snacks">
+            <img src="https://cdn.shopify.com/s/files/1/0773/6564/1406/collections/TeriyakiforWebsite.jpg?v=1792028382" alt="VP Beef Jerky snacks" loading="lazy">
+            <span class="sbf-category-card-copy"><strong>Pantry &amp; Snacks</strong><span>Jerky and snack favorites</span><span class="sbf-category-link-label">Shop snacks →</span></span>
+          </a>
+          <a class="sbf-category-card" href="/collections/farm-stand-goods">
+            <img src="https://cdn.shopify.com/s/files/1/0773/6564/1406/collections/IMG_8479.jpg?v=1792028387" alt="Bundled firewood from Spring Bottom Farm" loading="lazy">
+            <span class="sbf-category-card-copy"><strong>Farm Stand &amp; Goods</strong><span>Firewood and farm merchandise</span><span class="sbf-category-link-label">Shop goods →</span></span>
+          </a>
         </div>
-        <a class="sbf-egg-callout-link" href="/products/farm-fresh-eggs-1-dozen">Explore Egg Subscription <span aria-hidden="true">→</span></a>
+        <a class="sbf-shop-all-link" href="#sbf-all-products">Shop All Products <span aria-hidden="true">↓</span></a>
       </section>
     {% endif %}
 
     {% if collection.products_count > 0 %}
       {% assign featured_handles = 'farm-fresh-eggs-1-dozen,pasture-raised-boneless-skinless-chicken-breast' | split: ',' %}
-      <div class="sbf-product-grid-list">
+      <div class="sbf-product-grid-list" id="sbf-all-products">
         {% if collection.handle == 'all' %}
           {% for product in collection.products %}
             {% if featured_handles contains product.handle %}
@@ -49,13 +71,24 @@
 .sbf-wrap{max-width:1120px;margin:0 auto}
 .sbf-collection-page h1{font-size:clamp(42px,5vw,64px);line-height:1;margin:0 0 22px;letter-spacing:-.04em}
 .sbf-collection-description{font-size:18px;line-height:1.6;max-width:700px;margin-bottom:42px}
-.sbf-egg-subscription-callout{display:flex;align-items:center;justify-content:space-between;gap:28px;margin:34px 0 48px;padding:28px 32px;background:#ebe8dc;border:1px solid #ded9ca}
-.sbf-egg-callout-copy{max-width:640px}
-.sbf-callout-eyebrow{font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;opacity:.72;margin-bottom:8px}
-.sbf-egg-subscription-callout h2{font-size:clamp(22px,2.6vw,30px);line-height:1.12;letter-spacing:-.025em;margin:0 0 8px}
-.sbf-egg-subscription-callout p{font-size:15px;line-height:1.5;margin:0;max-width:600px}
-.sbf-egg-callout-link{flex-shrink:0;display:inline-flex;align-items:center;gap:12px;padding:14px 18px;background:#243126;color:#fff;text-decoration:none;font-size:14px;font-weight:700}
-.sbf-egg-callout-link:hover{background:#354936}
+.sbf-shop-categories{margin:30px 0 54px}
+.sbf-category-feature{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:230px;background:#ebe8dc;border:1px solid #ded9ca;color:inherit;text-decoration:none;overflow:hidden}
+.sbf-category-feature>img{display:block;width:100%;height:100%;min-height:230px;max-height:310px;object-fit:cover}
+.sbf-category-feature-copy{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:30px 34px;gap:10px}
+.sbf-category-eyebrow{font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;opacity:.72}
+.sbf-category-feature-copy strong{font-size:clamp(25px,3vw,36px);line-height:1.08;letter-spacing:-.03em}
+.sbf-category-feature-copy>span:not(.sbf-category-eyebrow):not(.sbf-category-link-label){font-size:15px;line-height:1.5}
+.sbf-category-link-label{font-size:14px;font-weight:750;margin-top:5px}
+.sbf-category-feature:hover .sbf-category-link-label,.sbf-category-card:hover .sbf-category-link-label{text-decoration:underline;text-underline-offset:4px}
+.sbf-category-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:20px}
+.sbf-category-card{display:flex;flex-direction:column;color:inherit;text-decoration:none;min-width:0;background:#fffdf8;border:1px solid #e6e0d4;overflow:hidden}
+.sbf-category-card>img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#eee9df}
+.sbf-category-card-copy{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:18px 20px 20px}
+.sbf-category-card-copy strong{font-size:21px;line-height:1.2}
+.sbf-category-card-copy>span:not(.sbf-category-link-label){font-size:14px;line-height:1.45;color:#555d53}
+.sbf-shop-all-link{display:flex;align-items:center;justify-content:center;gap:12px;margin:24px auto 0;padding:15px 22px;max-width:280px;background:#243126;color:#fff;text-decoration:none;font-size:14px;font-weight:750}
+.sbf-shop-all-link:hover{background:#354936}
+#sbf-all-products{scroll-margin-top:28px}
 .sbf-product-grid-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px 28px;align-items:start}
 .sbf-product-card{display:block;color:inherit;text-decoration:none;min-width:0}
 .sbf-product-image-wrap{width:100%;aspect-ratio:1/1;overflow:hidden;background:#eee9df;margin-bottom:16px}
@@ -64,6 +97,6 @@
 .sbf-product-info{padding:0 3px}
 .sbf-product-card h2{font-size:21px;line-height:1.2;margin:0 0 7px;font-weight:600}
 .sbf-product-price{font-size:17px;font-weight:700}
-@media(max-width:749px){.sbf-collection-page{padding:48px 18px}.sbf-egg-subscription-callout{display:block;margin:28px 0 38px;padding:23px 20px}.sbf-egg-callout-link{margin-top:18px}.sbf-product-grid-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 16px}.sbf-product-card h2{font-size:18px}}
+@media(max-width:749px){.sbf-collection-page{padding:48px 18px}.sbf-category-feature{grid-template-columns:1fr}.sbf-category-feature>img{height:auto;min-height:0;max-height:none;aspect-ratio:16/9}.sbf-category-feature-copy{padding:22px 20px}.sbf-category-grid{gap:14px;margin-top:14px}.sbf-category-card-copy{padding:14px}.sbf-category-card-copy strong{font-size:18px}.sbf-shop-all-link{max-width:none;width:100%}.sbf-product-grid-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 16px}.sbf-product-card h2{font-size:18px}}
 @media(max-width:480px){.sbf-product-grid-list{gap:28px 12px}.sbf-product-card h2{font-size:16px}}
 </style>
