@@ -1,6 +1,354 @@
+{% doc %}
+  @prompt
+    Create a polished, visually engaging Wholesale & Food Service section for Spring Bottom Farm's wholesale page only, not the homepage or other pages. Use a warm, credible farm-to-business aesthetic that complements the existing theme. Include an impactful introductory heading for restaurants, cafés, bakeries, food service operations, farm stands, and retail shops; a prominent editable farm-photo area that can remain unset until a real photo is selected; and a visually distinct heritage section headed 'A family legacy in wholesale distribution since 1921.' Explain that the owner of Spring Bottom Farm also owns Price Wholesale Distribution, founded in 1921 by their great-grandfather, and that this family distribution history underpins their approach to business relationships and service. Keep the businesses distinct and never imply Spring Bottom Farm was founded in 1921. Add well-spaced content areas inviting buyers to discuss product availability, wholesale pricing, quantities, and pickup or delivery options, without inventing prices, certifications, delivery coverage, guarantees, or minimums. Finish with a clear 'Discuss wholesale with us' call to action linking to /pages/contact and guidance to include business name, location, products, quantities, ordering frequency, and preferred start date. Make all copy, imagery, and links editable. Use strong typography, restrained colors, generous spacing, and a responsive mobile layout. This should complement or replace the current plain-text presentation on the wholesale page without duplicating that text or altering other pages.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% if request.page_type == 'page' and page.handle == 'wholesale' %}
+  {% style %}
+    .ai-wholesale-{{ ai_gen_id }} {
+      display: block;
+      width: {{ block.settings.desktop_width_percent }}%;
+      max-width: 100%;
+      margin: 0 auto;
+      color: {{ block.settings.text_color }};
+      background: {{ block.settings.background_color }};
+      font-family: inherit;
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__inner {
+      width: min(100%, 1180px);
+      margin: 0 auto;
+      padding: clamp(30px, 6vw, 76px) clamp(18px, 5vw, 56px);
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.92fr);
+      gap: clamp(28px, 6vw, 76px);
+      align-items: center;
+      padding-bottom: clamp(48px, 8vw, 96px);
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__eyebrow {
+      margin: 0 0 14px;
+      color: {{ block.settings.accent_color }};
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__heading {
+      margin: 0 0 20px;
+      color: {{ block.settings.heading_color }};
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(34px, 5vw, 62px);
+      font-weight: 500;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__intro,
+    .ai-wholesale-{{ ai_gen_id }}__heritage-copy,
+    .ai-wholesale-{{ ai_gen_id }}__topic-copy,
+    .ai-wholesale-{{ ai_gen_id }}__cta-copy {
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__intro p,
+    .ai-wholesale-{{ ai_gen_id }}__heritage-copy p,
+    .ai-wholesale-{{ ai_gen_id }}__topic-copy p,
+    .ai-wholesale-{{ ai_gen_id }}__cta-copy p {
+      margin: 0 0 12px;
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__intro p:last-child,
+    .ai-wholesale-{{ ai_gen_id }}__heritage-copy p:last-child,
+    .ai-wholesale-{{ ai_gen_id }}__topic-copy p:last-child,
+    .ai-wholesale-{{ ai_gen_id }}__cta-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__photo {
+      position: relative;
+      overflow: hidden;
+      min-height: 300px;
+      aspect-ratio: 4 / 3;
+      border-radius: 5px;
+      background: {{ block.settings.photo_background }};
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__photo img,
+    .ai-wholesale-{{ ai_gen_id }}__photo svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      object-fit: cover;
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__photo svg {
+      color: {{ block.settings.accent_color }};
+      opacity: 0.45;
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__photo-note {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      left: 14px;
+      padding: 9px 12px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.94);
+      color: {{ block.settings.text_color }};
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__heritage {
+      display: grid;
+      grid-template-columns: minmax(150px, 0.36fr) minmax(0, 1fr);
+      gap: clamp(24px, 5vw, 62px);
+      padding: clamp(28px, 5vw, 56px);
+      border-top: 1px solid {{ block.settings.rule_color }};
+      border-bottom: 1px solid {{ block.settings.rule_color }};
+      background: {{ block.settings.panel_color }};
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__heritage-mark {
+      align-self: start;
+      color: {{ block.settings.accent_color }};
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(40px, 6vw, 70px);
+      line-height: 1;
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__heritage-heading {
+      margin: 0 0 16px;
+      color: {{ block.settings.heading_color }};
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height: 1.16;
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__topics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(22px, 4vw, 44px);
+      padding: clamp(48px, 7vw, 82px) 0;
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__topic {
+      padding-top: 18px;
+      border-top: 2px solid {{ block.settings.accent_color }};
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__topic-title {
+      margin: 0 0 12px;
+      color: {{ block.settings.heading_color }};
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 23px;
+      font-weight: 500;
+      line-height: 1.25;
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      padding: clamp(26px, 4.5vw, 48px);
+      border-radius: 5px;
+      background: {{ block.settings.cta_background }};
+      color: {{ block.settings.cta_text_color }};
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__cta-heading {
+      margin: 0 0 10px;
+      color: {{ block.settings.cta_text_color }};
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(27px, 3.5vw, 39px);
+      font-weight: 500;
+      line-height: 1.15;
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__cta-copy {
+      max-width: 700px;
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__button {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 22px;
+      border: 2px solid {{ block.settings.button_background }};
+      border-radius: 3px;
+      background: {{ block.settings.button_background }};
+      color: {{ block.settings.button_text_color }};
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.3;
+      text-align: center;
+      text-decoration: none;
+      transition: background-color 150ms ease, color 150ms ease;
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__button:hover {
+      background: transparent;
+      color: {{ block.settings.cta_text_color }};
+    }
+
+    .ai-wholesale-{{ ai_gen_id }}__button:focus-visible {
+      outline: 3px solid {{ block.settings.focus_color }};
+      outline-offset: 4px;
+    }
+
+    @media screen and (max-width: 749px) {
+      .ai-wholesale-{{ ai_gen_id }} {
+        width: 100%;
+      }
+
+      .ai-wholesale-{{ ai_gen_id }}__hero,
+      .ai-wholesale-{{ ai_gen_id }}__heritage {
+        grid-template-columns: 1fr;
+      }
+
+      .ai-wholesale-{{ ai_gen_id }}__hero {
+        gap: 26px;
+      }
+
+      .ai-wholesale-{{ ai_gen_id }}__photo {
+        min-height: 220px;
+      }
+
+      .ai-wholesale-{{ ai_gen_id }}__heritage-mark {
+        font-size: 48px;
+      }
+
+      .ai-wholesale-{{ ai_gen_id }}__topics {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .ai-wholesale-{{ ai_gen_id }}__cta {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .ai-wholesale-{{ ai_gen_id }}__button {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ai-wholesale-{{ ai_gen_id }}__button {
+        transition: none;
+      }
+    }
+  {% endstyle %}
+
+  <section class="ai-wholesale-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+    <div class="ai-wholesale-{{ ai_gen_id }}__inner">
+      <div class="ai-wholesale-{{ ai_gen_id }}__hero">
+        <div>
+          {% if block.settings.eyebrow != blank %}<p class="ai-wholesale-{{ ai_gen_id }}__eyebrow">{{ block.settings.eyebrow | escape }}</p>{% endif %}
+          <h1 class="ai-wholesale-{{ ai_gen_id }}__heading">{{ block.settings.intro_heading | escape }}</h1>
+          <div class="ai-wholesale-{{ ai_gen_id }}__intro">{{ block.settings.intro_copy }}</div>
+        </div>
+        <div class="ai-wholesale-{{ ai_gen_id }}__photo">
+          {% if block.settings.farm_photo != blank %}
+            {{ block.settings.farm_photo | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '500, 800, 1100, 1400', alt: block.settings.farm_photo.alt | escape }}
+          {% else %}
+            {{ 'image' | placeholder_svg_tag }}
+            <div class="ai-wholesale-{{ ai_gen_id }}__photo-note">{{ block.settings.photo_note | escape }}</div>
+          {% endif %}
+        </div>
+      </div>
+
+      <section class="ai-wholesale-{{ ai_gen_id }}__heritage" aria-labelledby="ai-wholesale-heritage-{{ ai_gen_id }}">
+        <div class="ai-wholesale-{{ ai_gen_id }}__heritage-mark" aria-hidden="true">{{ block.settings.heritage_mark | escape }}</div>
+        <div>
+          <h2 class="ai-wholesale-{{ ai_gen_id }}__heritage-heading" id="ai-wholesale-heritage-{{ ai_gen_id }}">{{ block.settings.heritage_heading | escape }}</h2>
+          <div class="ai-wholesale-{{ ai_gen_id }}__heritage-copy">{{ block.settings.heritage_copy }}</div>
+        </div>
+      </section>
+
+      <div class="ai-wholesale-{{ ai_gen_id }}__topics">
+        <article class="ai-wholesale-{{ ai_gen_id }}__topic">
+          <h2 class="ai-wholesale-{{ ai_gen_id }}__topic-title">{{ block.settings.topic_one_heading | escape }}</h2>
+          <div class="ai-wholesale-{{ ai_gen_id }}__topic-copy">{{ block.settings.topic_one_copy }}</div>
+        </article>
+        <article class="ai-wholesale-{{ ai_gen_id }}__topic">
+          <h2 class="ai-wholesale-{{ ai_gen_id }}__topic-title">{{ block.settings.topic_two_heading | escape }}</h2>
+          <div class="ai-wholesale-{{ ai_gen_id }}__topic-copy">{{ block.settings.topic_two_copy }}</div>
+        </article>
+        <article class="ai-wholesale-{{ ai_gen_id }}__topic">
+          <h2 class="ai-wholesale-{{ ai_gen_id }}__topic-title">{{ block.settings.topic_three_heading | escape }}</h2>
+          <div class="ai-wholesale-{{ ai_gen_id }}__topic-copy">{{ block.settings.topic_three_copy }}</div>
+        </article>
+      </div>
+
+      <div class="ai-wholesale-{{ ai_gen_id }}__cta">
+        <div>
+          <h2 class="ai-wholesale-{{ ai_gen_id }}__cta-heading">{{ block.settings.cta_heading | escape }}</h2>
+          <div class="ai-wholesale-{{ ai_gen_id }}__cta-copy">{{ block.settings.cta_copy }}</div>
+        </div>
+        <a class="ai-wholesale-{{ ai_gen_id }}__button" href="{{ block.settings.cta_link }}">{{ block.settings.cta_label | escape }}</a>
+      </div>
+    </div>
+  </section>
+{% endif %}
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Wholesale & food service",
+  "settings": [
+    { "type": "range", "id": "desktop_width_percent", "label": "Desktop width", "min": 50, "max": 100, "step": 5, "unit": "%", "default": 100 },
+    { "type": "header", "content": "Introduction" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Wholesale & food service" },
+    { "type": "text", "id": "intro_heading", "label": "Heading", "default": "Good food starts with good farm relationships." },
+    { "type": "richtext", "id": "intro_copy", "label": "Introduction", "default": "<p>We welcome conversations with restaurants, cafés, bakeries, food service operations, farm stands, and retail shops looking for thoughtfully grown seasonal produce from Spring Bottom Farm.</p>" },
+    { "type": "image_picker", "id": "farm_photo", "label": "Farm photo" },
+    { "type": "text", "id": "photo_note", "label": "Photo placeholder message", "default": "Add a farm or harvest photo when you’re ready." },
+    { "type": "color", "id": "photo_background", "label": "Photo placeholder background", "default": "#E8E2D5" },
+    { "type": "header", "content": "Family heritage" },
+    { "type": "text", "id": "heritage_mark", "label": "Heritage mark", "default": "1921" },
+    { "type": "text", "id": "heritage_heading", "label": "Heritage heading", "default": "A family legacy in wholesale distribution since 1921." },
+    { "type": "richtext", "id": "heritage_copy", "label": "Heritage story", "default": "<p>The owner of Spring Bottom Farm also owns Price Wholesale Distribution, founded in 1921 by their great-grandfather. That family history in distribution informs how we approach business relationships and service today. Spring Bottom Farm and Price Wholesale Distribution are distinct businesses, connected by a shared commitment to thoughtful, dependable relationships.</p>" },
+    { "type": "header", "content": "Wholesale conversations" },
+    { "type": "text", "id": "topic_one_heading", "label": "First topic heading", "default": "Seasonal availability" },
+    { "type": "richtext", "id": "topic_one_copy", "label": "First topic copy", "default": "<p>Tell us what ingredients or farm products you’re looking for, and we can discuss what may be available through the season.</p>" },
+    { "type": "text", "id": "topic_two_heading", "label": "Second topic heading", "default": "Pricing & quantities" },
+    { "type": "richtext", "id": "topic_two_copy", "label": "Second topic copy", "default": "<p>Share the products and approximate quantities that fit your operation so we can talk through wholesale pricing and potential order sizes.</p>" },
+    { "type": "text", "id": "topic_three_heading", "label": "Third topic heading", "default": "Pickup or delivery" },
+    { "type": "richtext", "id": "topic_three_copy", "label": "Third topic copy", "default": "<p>Let us know your location and preferred way to receive an order. We can discuss available pickup or delivery options together.</p>" },
+    { "type": "header", "content": "Contact call to action" },
+    { "type": "text", "id": "cta_heading", "label": "Call to action heading", "default": "Let’s talk about working together." },
+    { "type": "richtext", "id": "cta_copy", "label": "Call to action details", "default": "<p>Use the contact form and include your business name, location, products of interest, quantities, ordering frequency, and preferred start date. The more detail you share, the more useful our conversation can be.</p>" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Discuss wholesale with us" },
+    { "type": "url", "id": "cta_link", "label": "Button link" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#FBF8F1" },
+    { "type": "color", "id": "panel_color", "label": "Heritage panel", "default": "#EEE9DD" },
+    { "type": "color", "id": "heading_color", "label": "Headings", "default": "#263B2C" },
+    { "type": "color", "id": "text_color", "label": "Body text", "default": "#33372F" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#526B45" },
+    { "type": "color", "id": "rule_color", "label": "Dividers", "default": "#D5CEBF" },
+    { "type": "color", "id": "cta_background", "label": "Call to action background", "default": "#263B2C" },
+    { "type": "color", "id": "cta_text_color", "label": "Call to action text", "default": "#FFFFFF" },
+    { "type": "color", "id": "button_background", "label": "Button background", "default": "#F2E8D4" },
+    { "type": "color", "id": "button_text_color", "label": "Button text", "default": "#263B2C" },
+    { "type": "color", "id": "focus_color", "label": "Focus outline", "default": "#F2C879" }
+  ],
+  "presets": [{ "name": "Wholesale & food service" }],
+  "tag": null,
+  "class": "wholesale-food-service-block"
+}
 {% endschema %}
