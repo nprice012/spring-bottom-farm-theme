@@ -188,6 +188,220 @@
       </section>
     </div>
   </div>
+{% elsif page.handle == 'wholesale-food-service' %}
+  <style>
+    .sbf-wholesale{background:#f7f4ed;color:#243126}
+    .sbf-wholesale *{box-sizing:border-box}
+    .sbf-wholesale-hero{display:grid;grid-template-columns:1fr 1fr;min-height:560px;background:#243b2f;color:#fff}
+    .sbf-wholesale-hero-copy{display:flex;flex-direction:column;justify-content:center;padding:clamp(45px,7vw,100px);max-width:760px;margin-left:auto}
+    .sbf-wholesale-eyebrow{font-size:12px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;margin-bottom:20px}
+    .sbf-wholesale-hero h1{font-size:clamp(44px,5.4vw,74px);line-height:.98;letter-spacing:-.045em;margin:0 0 25px}
+    .sbf-wholesale-hero p{font-size:18px;line-height:1.7;max-width:590px;margin:0 0 30px}
+    .sbf-wholesale-hero-image{min-height:460px;overflow:hidden}
+    .sbf-wholesale-hero-image img{width:100%;height:100%;min-height:100%;object-fit:cover;display:block}
+    .sbf-wholesale-btn{display:inline-flex;align-items:center;justify-content:center;align-self:flex-start;padding:16px 24px;background:#fff;color:#243126;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;transition:transform .18s ease,opacity .18s ease}
+    .sbf-wholesale-btn:hover{transform:translateY(-2px);opacity:.9}
+    .sbf-wholesale-trust{display:grid;grid-template-columns:repeat(3,1fr);max-width:1200px;margin:0 auto;padding:0 24px;transform:translateY(-1px)}
+    .sbf-wholesale-trust-item{padding:28px 24px;background:#e5dfd2;border-right:1px solid rgba(36,49,38,.12)}
+    .sbf-wholesale-trust-item:last-child{border-right:0}
+    .sbf-wholesale-trust-item strong{display:block;font-size:17px;margin-bottom:7px}
+    .sbf-wholesale-trust-item span{font-size:14px;line-height:1.5}
+    .sbf-wholesale-section{max-width:1200px;margin:0 auto;padding:95px 24px}
+    .sbf-wholesale-section-head{max-width:780px;margin:0 auto 45px;text-align:center}
+    .sbf-wholesale-section h2{font-size:clamp(34px,4.5vw,54px);line-height:1.03;letter-spacing:-.04em;margin:0 0 18px}
+    .sbf-wholesale-section-head p{font-size:17px;line-height:1.7;margin:0}
+    .sbf-wholesale-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .sbf-wholesale-card{background:#fff;box-shadow:0 8px 28px rgba(36,49,38,.07)}
+    .sbf-wholesale-card img{display:block;width:100%;height:230px;object-fit:cover}
+    .sbf-wholesale-card-copy{padding:25px}
+    .sbf-wholesale-card h3{font-size:21px;line-height:1.2;margin:0 0 10px}
+    .sbf-wholesale-card p{font-size:15px;line-height:1.65;margin:0}
+    .sbf-wholesale-story{display:grid;grid-template-columns:1fr 1fr;background:#e5dfd2}
+    .sbf-wholesale-story-image{min-height:460px}
+    .sbf-wholesale-story-image img{display:block;width:100%;height:100%;object-fit:cover}
+    .sbf-wholesale-story-copy{display:flex;flex-direction:column;justify-content:center;padding:clamp(35px,6vw,80px)}
+    .sbf-wholesale-story-copy h2{font-size:clamp(34px,4vw,50px);line-height:1.05;letter-spacing:-.035em;margin:0 0 22px}
+    .sbf-wholesale-story-copy p{font-size:17px;line-height:1.75;margin:0 0 16px}
+    .sbf-wholesale-form-section{background:#243b2f;color:#fff;padding:95px 24px}
+    .sbf-wholesale-form-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:.8fr 1.2fr;gap:65px;align-items:start}
+    .sbf-wholesale-form-intro h2{font-size:clamp(38px,4.8vw,58px);line-height:1;letter-spacing:-.04em;margin:0 0 22px}
+    .sbf-wholesale-form-intro p{font-size:17px;line-height:1.7;color:rgba(255,255,255,.85);margin:0 0 25px}
+    .sbf-wholesale-form-intro ul{padding-left:20px;margin:0}
+    .sbf-wholesale-form-intro li{padding:5px 0;font-size:15px;line-height:1.5}
+    .sbf-wholesale-form{background:#fff;color:#243126;padding:clamp(24px,4vw,42px)}
+    .sbf-wholesale-form h3{font-size:25px;margin:0 0 8px}
+    .sbf-wholesale-form .sbf-form-note{font-size:14px;line-height:1.55;color:#5c655d;margin:0 0 25px}
+    .sbf-wholesale-fields{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+    .sbf-wholesale-field{display:flex;flex-direction:column;gap:7px;min-width:0}
+    .sbf-wholesale-field.full{grid-column:1/-1}
+    .sbf-wholesale-field label{font-size:12px;font-weight:700;letter-spacing:.04em}
+    .sbf-wholesale-field input,.sbf-wholesale-field select,.sbf-wholesale-field textarea{width:100%;min-height:48px;border:1px solid #d4d7d0;border-radius:0;padding:12px 13px;background:#fff;color:#243126;font:inherit;font-size:15px}
+    .sbf-wholesale-field textarea{min-height:115px;resize:vertical}
+    .sbf-wholesale-field input:focus,.sbf-wholesale-field select:focus,.sbf-wholesale-field textarea:focus{outline:2px solid #78917e;outline-offset:1px}
+    .sbf-wholesale-submit{margin-top:20px;width:100%;min-height:54px;border:0;background:#243b2f;color:#fff;padding:16px 22px;font:inherit;font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;cursor:pointer}
+    .sbf-wholesale-submit:hover{background:#354f3e}
+    .sbf-wholesale-success{padding:14px 16px;background:#e7f0e6;color:#243126;margin-bottom:20px;line-height:1.5}
+    .sbf-wholesale-errors{padding:12px 15px;background:#fff0ed;color:#812f20;margin-bottom:18px;font-size:14px}
+    .sbf-wholesale-bottom{padding:70px 24px;text-align:center;background:#e5dfd2}
+    .sbf-wholesale-bottom h2{font-size:clamp(32px,4vw,46px);line-height:1.05;margin:0 0 15px;letter-spacing:-.035em}
+    .sbf-wholesale-bottom p{font-size:16px;line-height:1.65;margin:0 auto 24px;max-width:680px}
+    .sbf-wholesale-bottom .sbf-wholesale-btn{background:#243b2f;color:#fff;align-self:auto}
+    @media(max-width:850px){
+      .sbf-wholesale-hero,.sbf-wholesale-story{grid-template-columns:1fr}
+      .sbf-wholesale-hero-copy{max-width:none;margin:0;padding:65px 30px}
+      .sbf-wholesale-hero-image{min-height:360px;max-height:480px}
+      .sbf-wholesale-trust{grid-template-columns:1fr;padding:0 18px}
+      .sbf-wholesale-trust-item{border-right:0;border-bottom:1px solid rgba(36,49,38,.12);padding:22px}
+      .sbf-wholesale-trust-item:last-child{border-bottom:0}
+      .sbf-wholesale-cards{grid-template-columns:1fr 1fr}
+      .sbf-wholesale-card:last-child{grid-column:1/-1}
+      .sbf-wholesale-card:last-child img{height:250px}
+      .sbf-wholesale-story-image{min-height:350px}
+      .sbf-wholesale-form-grid{grid-template-columns:1fr;gap:35px}
+    }
+    @media(max-width:560px){
+      .sbf-wholesale-section{padding:65px 18px}
+      .sbf-wholesale-cards{grid-template-columns:1fr}
+      .sbf-wholesale-card:last-child{grid-column:auto}
+      .sbf-wholesale-card img,.sbf-wholesale-card:last-child img{height:230px}
+      .sbf-wholesale-fields{grid-template-columns:1fr}
+      .sbf-wholesale-field.full{grid-column:auto}
+      .sbf-wholesale-form-section{padding:65px 16px}
+      .sbf-wholesale-form{padding:23px 18px}
+      .sbf-wholesale-story-copy{padding:45px 25px}
+    }
+  </style>
+
+  <div class="sbf-wholesale">
+    <section class="sbf-wholesale-hero">
+      <div class="sbf-wholesale-hero-copy">
+        <div class="sbf-wholesale-eyebrow">Wholesale &amp; Food Service</div>
+        <h1>Good products.<br>Reliable supply.</h1>
+        <p>Wholesale food and beverage solutions for restaurants, independent markets, and food-service businesses—backed by regional distribution experience and a local farm perspective.</p>
+        <a class="sbf-wholesale-btn" href="#wholesale-inquiry">Request Wholesale Pricing</a>
+      </div>
+      <div class="sbf-wholesale-hero-image">
+        <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&amp;fit=crop&amp;w=1500&amp;q=85" alt="Fresh produce displayed for food service and retail customers" loading="eager">
+      </div>
+    </section>
+
+    <div class="sbf-wholesale-trust">
+      <div class="sbf-wholesale-trust-item"><strong>Established in 1921</strong><span>Distribution heritage through Price Wholesale Distributors.</span></div>
+      <div class="sbf-wholesale-trust-item"><strong>Regional Delivery</strong><span>Serving customers from Northern Virginia through Carroll County and north into York County, Pennsylvania.</span></div>
+      <div class="sbf-wholesale-trust-item"><strong>Built for Business</strong><span>Wholesale support for restaurants, independent markets, and food-service operators.</span></div>
+    </div>
+
+    <section class="sbf-wholesale-section">
+      <div class="sbf-wholesale-section-head">
+        <div class="sbf-wholesale-eyebrow">Wholesale Partnerships</div>
+        <h2>Supply that supports your business.</h2>
+        <p>We help connect businesses with food and beverage products suited to their operation. Tell us what you need and where you do business, and we'll follow up about availability, delivery, and pricing.</p>
+      </div>
+      <div class="sbf-wholesale-cards">
+        <article class="sbf-wholesale-card">
+          <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" alt="Food preparation in a professional kitchen" loading="lazy">
+          <div class="sbf-wholesale-card-copy"><h3>Restaurants &amp; Kitchens</h3><p>Wholesale products for independent restaurants, kitchens, and food-service teams that need dependable supply.</p></div>
+        </article>
+        <article class="sbf-wholesale-card">
+          <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" alt="Fresh food selection for retail markets" loading="lazy">
+          <div class="sbf-wholesale-card-copy"><h3>Independent Markets</h3><p>Food and beverage options for neighborhood markets, farm shops, and independent retailers.</p></div>
+        </article>
+        <article class="sbf-wholesale-card">
+          <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" alt="Fresh meat ingredients for food businesses" loading="lazy">
+          <div class="sbf-wholesale-card-copy"><h3>Food &amp; Beverage Supply</h3><p>Discuss the products, brands, pack sizes, and delivery needs that make sense for your business.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="sbf-wholesale-story">
+      <div class="sbf-wholesale-story-image">
+        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Business team discussing supply and service needs" loading="lazy">
+      </div>
+      <div class="sbf-wholesale-story-copy">
+        <div class="sbf-wholesale-eyebrow">A Partnership with Experience</div>
+        <h2>Local roots.<br>Wholesale experience.</h2>
+        <p>Spring Bottom Farm brings a local, hands-on perspective to food and farm products. Through our partnership with Price Wholesale Distributors, a business established in 1921, we can discuss a broader range of wholesale food and beverage needs.</p>
+        <p>Our regional focus spans Northern Virginia, Carroll County, and north into York County, Pennsylvania. Availability and delivery depend on your location and product requirements.</p>
+      </div>
+    </section>
+
+    <section class="sbf-wholesale-form-section" id="wholesale-inquiry">
+      <div class="sbf-wholesale-form-grid">
+        <div class="sbf-wholesale-form-intro">
+          <div class="sbf-wholesale-eyebrow">Start a Conversation</div>
+          <h2>Request wholesale pricing.</h2>
+          <p>Share a few details about your business and what you're looking for. We'll review your inquiry and get back to you about product availability, pricing, and delivery options.</p>
+          <ul>
+            <li>Restaurant and food-service inquiries</li>
+            <li>Independent grocery and market inquiries</li>
+            <li>Product availability and regional delivery questions</li>
+          </ul>
+        </div>
+        <div class="sbf-wholesale-form">
+          <h3>Wholesale inquiry</h3>
+          <p class="sbf-form-note">Fields marked * are required. Submitting this form does not guarantee product availability or a delivery route.</p>
+          {% form 'contact', id: 'WholesaleContactForm' %}
+            {% if form.posted_successfully? %}
+              <div class="sbf-wholesale-success" role="status">Thank you for your inquiry. Your information has been submitted to Spring Bottom Farm.</div>
+            {% endif %}
+            {% if form.errors %}
+              <div class="sbf-wholesale-errors">{{ form.errors | default_errors }}</div>
+            {% endif %}
+            <input type="hidden" name="contact[subject]" value="Wholesale &amp; Food Service Inquiry">
+            <div class="sbf-wholesale-fields">
+              <div class="sbf-wholesale-field">
+                <label for="WholesaleName">Your name *</label>
+                <input id="WholesaleName" type="text" name="contact[name]" autocomplete="name" required>
+              </div>
+              <div class="sbf-wholesale-field">
+                <label for="WholesaleBusiness">Business name *</label>
+                <input id="WholesaleBusiness" type="text" name="contact[Business name]" autocomplete="organization" required>
+              </div>
+              <div class="sbf-wholesale-field">
+                <label for="WholesaleEmail">Business email *</label>
+                <input id="WholesaleEmail" type="email" name="contact[email]" autocomplete="email" required>
+              </div>
+              <div class="sbf-wholesale-field">
+                <label for="WholesalePhone">Phone number</label>
+                <input id="WholesalePhone" type="tel" name="contact[phone]" autocomplete="tel">
+              </div>
+              <div class="sbf-wholesale-field">
+                <label for="WholesaleType">Business type *</label>
+                <select id="WholesaleType" name="contact[Business type]" required>
+                  <option value="" selected disabled>Select your business type</option>
+                  <option>Restaurant / food service</option>
+                  <option>Independent grocery or market</option>
+                  <option>Farm store or specialty retailer</option>
+                  <option>Caterer</option>
+                  <option>Other business</option>
+                </select>
+              </div>
+              <div class="sbf-wholesale-field">
+                <label for="WholesaleLocation">City, state or ZIP *</label>
+                <input id="WholesaleLocation" type="text" name="contact[Business location]" autocomplete="postal-code" required>
+              </div>
+              <div class="sbf-wholesale-field full">
+                <label for="WholesaleProducts">Products or brands you're interested in</label>
+                <input id="WholesaleProducts" type="text" name="contact[Products of interest]" placeholder="e.g. beverages, frozen products, farm products">
+              </div>
+              <div class="sbf-wholesale-field full">
+                <label for="WholesaleDetails">Tell us about your needs</label>
+                <textarea id="WholesaleDetails" name="contact[body]" placeholder="Products, approximate volume, delivery frequency, or questions…"></textarea>
+              </div>
+            </div>
+            <button class="sbf-wholesale-submit" type="submit">Send Wholesale Inquiry</button>
+          {% endform %}
+        </div>
+      </div>
+    </section>
+
+    <section class="sbf-wholesale-bottom">
+      <div class="sbf-wholesale-eyebrow">Spring Bottom Farm × Price Wholesale Distributors</div>
+      <h2>Let's talk about your supply needs.</h2>
+      <p>Tell us what your business needs and where you operate. We'll help determine whether our products and delivery network are a fit.</p>
+      <a class="sbf-wholesale-btn" href="#wholesale-inquiry">Request Wholesale Pricing</a>
+    </section>
+  </div>
 {% else %}
   <div class="sbf-page">
     <div class="sbf-wrap">
