@@ -17,16 +17,11 @@ a{color:inherit;text-decoration:none}
 .sbf-header-inner{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:30px}
 .sbf-logo{display:flex;align-items:center;width:190px;height:82px;flex-shrink:0}
 .sbf-logo img{display:block;width:175px;height:75px;object-fit:contain}
-.sbf-nav{display:flex;align-items:center;justify-content:flex-end;flex-wrap:nowrap;gap:clamp(17px,1.5vw,26px);font-size:clamp(12px,.9vw,14px);font-weight:800;text-transform:uppercase;letter-spacing:.045em;white-space:nowrap}
-.sbf-nav a{display:inline-flex;align-items:center;min-height:46px;position:relative;transition:color .18s ease,opacity .18s ease;color:#1f3025}
-.sbf-nav a::after{content:"";position:absolute;left:0;right:0;bottom:4px;height:3px;border-radius:2px;background:var(--sbf-green);transform:scaleX(0);transform-origin:center;transition:transform .18s ease}
-.sbf-nav a:hover,.sbf-nav a:focus-visible{opacity:1;color:#56704f}
+.sbf-nav{display:flex;align-items:center;justify-content:flex-end;flex-wrap:nowrap;gap:clamp(18px,1.55vw,27px);font-size:clamp(12px,.88vw,13.5px);font-weight:700;text-transform:uppercase;letter-spacing:.025em;white-space:nowrap}
+.sbf-nav a{display:inline-flex;align-items:center;min-height:46px;position:relative;transition:color .18s ease; color:#263027}
+.sbf-nav a::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:2px;border-radius:2px;background:var(--sbf-green);transform:scaleX(0);transform-origin:center;transition:transform .18s ease}
+.sbf-nav a:hover,.sbf-nav a:focus-visible{color:#56704f}
 .sbf-nav a:hover::after,.sbf-nav a:focus-visible::after{transform:scaleX(1)}
-.sbf-nav a[href*="wholesale-food-service"]{color:#263b2f;font-weight:900}
-.sbf-nav a[href*="wholesale-food-service"]::before{content:"";position:absolute;inset:7px -10px;border:1px solid rgba(38,59,47,.28);border-radius:3px;pointer-events:none;transition:background .18s ease,border-color .18s ease}
-.sbf-nav a[href*="wholesale-food-service"]:hover::before{background:rgba(38,59,47,.06);border-color:#263b2f}
-.sbf-nav a:hover::after,.sbf-nav a:focus-visible::after{transform:scaleX(1)}
-.sbf-nav a:hover,.sbf-heading-row a:hover,.sbf-link:hover{opacity:.65}
 
 .sbf-hero{position:relative;min-height:720px;display:flex;align-items:center;overflow:hidden;background:#4b514b;color:#fff}
 .sbf-hero-bg,.sbf-hero-bg img,.sbf-hero-overlay{position:absolute;inset:0;width:100%;height:100%}
