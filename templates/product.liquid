@@ -55,15 +55,6 @@
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
         {% endunless %}
 
-        {% assign current_variant = product.selected_or_first_available_variant %}
-        {% if current_variant.selling_plan_allocations.size > 0 %}
-          <fieldset class="sbf-purchase-options">
-            
-            <label class="sbf-purchase-option"><input type="radio" name="selling_plan" value="" checked><span><strong>One-time purchase</strong><small>{{ current_variant.price | money }} today</small></span></label>
-            {% for allocation in current_variant.selling_plan_allocations %}<label class="sbf-purchase-option"><input type="radio" name="selling_plan" value="{{ allocation.selling_plan.id }}"><span><strong>{{ allocation.selling_plan.name }}</strong><small>{{ allocation.price | money }} per delivery</small></span></label>{% endfor %}
-          </fieldset>
-        {% endif %}
-
         <label for="Quantity-{{ section.id | default: 'product' }}">Quantity</label>
         <input id="Quantity-{{ section.id | default: 'product' }}" type="number" name="quantity" value="1" min="1">
         <button type="submit" class="sbf-button sbf-product-add-button" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>{% if product.selected_or_first_available_variant.available %}ADD TO CART{% else %}SOLD OUT{% endif %}</button>
