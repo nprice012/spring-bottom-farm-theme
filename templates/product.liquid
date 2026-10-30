@@ -58,7 +58,7 @@
         {% assign current_variant = product.selected_or_first_available_variant %}
         {% if current_variant.selling_plan_allocations.size > 0 %}
           <fieldset class="sbf-purchase-options">
-            <legend>Choose how you want your eggs</legend>
+            <legend>{% if is_egg_product %}Choose how you want your eggs{% elsif product.handle contains 'firewood' %}Choose your firewood purchase option{% else %}Choose your purchase option{% endif %}</legend>
             <label class="sbf-purchase-option"><input type="radio" name="selling_plan" value="" checked><span><strong>One-time purchase</strong><small>{{ current_variant.price | money }} today</small></span></label>
             {% for allocation in current_variant.selling_plan_allocations %}<label class="sbf-purchase-option"><input type="radio" name="selling_plan" value="{{ allocation.selling_plan.id }}"><span><strong>{{ allocation.selling_plan.name }}</strong><small>{{ allocation.price | money }} per delivery</small></span></label>{% endfor %}
           </fieldset>
